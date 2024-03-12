@@ -1,0 +1,41 @@
+﻿@using EMart.Models.Models
+@model List<Category>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+<h2>Category List</h2>
+
+<a asp-controller="Category" asp-action="Create" class="btn btn-primary">Create</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Category Name</th>
+            <th>Display Order</th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @foreach (var obj in Model)
+        {
+            <tr>
+                <td>@obj.Id</td>
+                <td>@obj.Name</td>
+                <td>@obj.DisplayOrder</td>
+                <td>
+                    <a asp-controller="Category" asp-action="Update" asp-route-id="@obj.Id" class="btn btn-primary">Edit</a>
+                    <a onclick="confirmDelete(@obj.Id)" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@section Scripts {
+    <script src="~/js/delete.js"></script>
+}

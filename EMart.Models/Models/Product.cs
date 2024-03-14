@@ -24,6 +24,9 @@ namespace EMart.Models.Models
         public Category category { get; set; }
         [ValidateNever]
         public string ImageUrl { get; set; }
+        public int Year { get; set; }
+        public string Season { get; set; }
+
 
     }
 }

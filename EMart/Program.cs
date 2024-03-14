@@ -14,6 +14,10 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
 builder.Services.AddScoped<ITeamTypeRepository, TeamTypeRepository>();
 builder.Services.AddScoped<ITeamRepository, TeamRepository>();
+builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
+builder.Services.AddScoped<ISpecificRepository, SpecificRepository>();
+builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+builder.Services.AddScoped<IEditionrepository, EditionRepository>();
 builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 
 var app = builder.Build();

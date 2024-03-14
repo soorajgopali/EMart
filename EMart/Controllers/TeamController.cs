@@ -47,7 +47,7 @@ namespace EMart.Controllers
                             model.Image.CopyTo(filestream);
                         }
 
-                        model.ImageUrl = @"/Images/Teams" + filename;
+                        model.ImageUrl = @"/Images/Teams/" + filename;
                     }
 
                     var team = new Team

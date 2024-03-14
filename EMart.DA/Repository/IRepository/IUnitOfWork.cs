@@ -12,6 +12,10 @@ namespace EMart.DA.Repository.IRepository
 
         ITeamTypeRepository TeamType { get; }
         ITeamRepository Team { get; }
+        IPlayerRepository Player { get; }
+        ISpecificRepository Specific { get; }
+        IBrandRepository Brand { get; }
+        IEditionrepository Edition { get; }
         void Save();
     }
 }

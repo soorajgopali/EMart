@@ -3,6 +3,7 @@ using EMart.DA.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EMart.DA.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240314112023_SpecificMigration")]
+    partial class SpecificMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,50 +23,6 @@ namespace EMart.DA.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("EMart.Models.Models.Brand", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Brands");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Adidas"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Nike"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Puma"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Under Armour"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "New Balance"
-                        });
-                });
 
             modelBuilder.Entity("EMart.Models.Models.Category", b =>
                 {
@@ -87,40 +46,6 @@ namespace EMart.DA.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("EMart.Models.Models.Edition", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Editions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "World Cup"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Champions League"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "New Collection"
-                        });
                 });
 
             modelBuilder.Entity("EMart.Models.Models.Player", b =>
@@ -406,7 +331,7 @@ namespace EMart.DA.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Specifics");
+                    b.ToTable("specifics");
 
                     b.HasData(
                         new

@@ -9,6 +9,9 @@ namespace EMart.DA.Repository.IRepository
     public interface IUnitOfWork
     {
         ICategoryRepository Category { get; }
+
+        ITeamTypeRepository TeamType { get; }
+        ITeamRepository Team { get; }
         void Save();
     }
 }

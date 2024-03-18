@@ -1,0 +1,28 @@
+﻿@model List<LeagueViewModel>
+
+
+    <h2>Leagues Index</h2>
+    <a asp-controller="League" asp-action="Create" class="btn btn-primary">Create</a>
+
+<table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Team Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var league in Model)
+            {
+                <tr>
+                    <td>@league.Id</td>
+                    <td>@league.Name</td>
+                <td><img src="@Url.Content(league.ImageUrl)" alt="@league.Name" width="40"></td>
+                    <td>@league.TeamTypeName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+

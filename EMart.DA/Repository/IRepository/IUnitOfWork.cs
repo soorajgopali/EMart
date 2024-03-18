@@ -16,6 +16,7 @@ namespace EMart.DA.Repository.IRepository
         ISpecificRepository Specific { get; }
         IBrandRepository Brand { get; }
         IEditionrepository Edition { get; }
+        ILeagueRepository League { get; }
         void Save();
     }
 }

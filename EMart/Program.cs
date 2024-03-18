@@ -18,6 +18,7 @@ builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
 builder.Services.AddScoped<ISpecificRepository, SpecificRepository>();
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 builder.Services.AddScoped<IEditionrepository, EditionRepository>();
+builder.Services.AddScoped<ILeagueRepository,LeageuRepository>();
 builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 
 var app = builder.Build();

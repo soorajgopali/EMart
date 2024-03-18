@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EMart.DA.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240314121443_EditionMigration")]
-    partial class EditionMigration
+    [Migration("20240315114001_Initialmigration")]
+    partial class Initialmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -124,6 +124,32 @@ namespace EMart.DA.Migrations
                             Id = 3,
                             Name = "New Collection"
                         });
+                });
+
+            modelBuilder.Entity("EMart.Models.Models.League", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TeamTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeamTypeId");
+
+                    b.ToTable("Leagues");
                 });
 
             modelBuilder.Entity("EMart.Models.Models.Player", b =>
@@ -441,16 +467,16 @@ namespace EMart.DA.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("LeagueId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TeamTypeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TeamTypeId");
+                    b.HasIndex("LeagueId");
 
                     b.ToTable("Teams");
                 });
@@ -484,7 +510,7 @@ namespace EMart.DA.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EMart.Models.Models.Team", b =>
+            modelBuilder.Entity("EMart.Models.Models.League", b =>
                 {
                     b.HasOne("EMart.Models.Models.TeamType", "Type")
                         .WithMany()
@@ -493,6 +519,17 @@ namespace EMart.DA.Migrations
                         .IsRequired();
 
                     b.Navigation("Type");
+                });
+
+            modelBuilder.Entity("EMart.Models.Models.Team", b =>
+                {
+                    b.HasOne("EMart.Models.Models.League", "League")
+                        .WithMany()
+                        .HasForeignKey("LeagueId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("League");
                 });
 #pragma warning restore 612, 618
         }

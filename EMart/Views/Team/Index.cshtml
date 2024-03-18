@@ -1,16 +1,19 @@
 ﻿@model List<TeamViewModel>
 
-<h2>Teams</h2>
 
+
+<h2>Teams Index</h2>
 <a asp-controller="Team" asp-action="Create" class="btn btn-primary">Create Team</a>
 
 <table class="table table-bordered table-striped">
+
     <thead>
         <tr>
-            <th>Id</th>
+            <th>ID</th>
             <th>Name</th>
             <th>Image</th>
-            <th>Type</th>
+            <th>Team Type</th>
+            <th>League</th>
         </tr>
     </thead>
     <tbody>
@@ -19,8 +22,9 @@
             <tr>
                 <td>@team.Id</td>
                 <td>@team.Name</td>
-                <td><img src="@team.ImageUrl" alt="" width="40" height="20" /></td>
+                <td><img src="@team.ImageUrl" alt="@team.Name" width="40"></td>
                 <td>@team.TeamTypeName</td>
+                <td>@team.LeagueName</td>
             </tr>
         }
     </tbody>

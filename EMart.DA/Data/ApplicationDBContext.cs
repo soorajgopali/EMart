@@ -21,6 +21,7 @@ namespace EMart.DA.Data
         public DbSet<Specific> Specifics { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Edition> Editions { get; set; }
+        public DbSet<League> Leagues { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

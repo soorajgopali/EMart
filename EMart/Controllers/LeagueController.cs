@@ -2,64 +2,57 @@
 using EMart.Models.Models;
 using EMart.Models.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace EMart.Controllers
 {
-    public class TeamController : Controller
+    public class LeagueController : Controller
     {
-        private readonly IUnitOfWork _unit;
-        private readonly IWebHostEnvironment _webHostEnvironment;
-
-        public TeamController(IUnitOfWork unit, IWebHostEnvironment webHostEnvironment)
+        private readonly IUnitOfWork _Unit;
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+        public LeagueController(IUnitOfWork unit, IWebHostEnvironment webHostEnvironment)
         {
-            _unit = unit;
-            _webHostEnvironment = webHostEnvironment;
+            _Unit = unit;
+            _WebHostEnvironment = webHostEnvironment;
         }
-
         public IActionResult Index()
         {
-            var teamViewModels = _unit.Team.GetList();
-            return View(teamViewModels);
+            var leaguViewModel = _Unit.League.GetList();
+            return View(leaguViewModel);
         }
+
         public IActionResult Create()
         {
-            ViewBag.TeamTypes = _unit.TeamType.GetAll().ToList();
-            ViewBag.LeagueTypes = _unit.League.GetAll().ToList();   
+            ViewBag.TeamTypes = _Unit.TeamType.GetAll().ToList();
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(TeamViewModel model)
+        public IActionResult Create(LeagueViewModel model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    string wwwRootPath = _webHostEnvironment.WebRootPath;
+                    string wwwRootPath = _WebHostEnvironment.WebRootPath;
                     if (model.Image != null)
                     {
                         string filename = Guid.NewGuid() + Path.GetExtension(model.Image.FileName);
-                        string filepath = Path.Combine(wwwRootPath, @"Images/Teams");
+                        string filepath = Path.Combine(wwwRootPath, @"Images/League");
 
                         using (var filestream = new FileStream(Path.Combine(filepath, filename), FileMode.Create))
                         {
                             model.Image.CopyTo(filestream);
                         }
-
-                        model.ImageUrl = @"/Images/Teams/" + filename;
+                        model.ImageUrl = @"/Images/League/" + filename;
                     }
-
-                    var team = new Team
+                    var league = new League
                     {
                         Name = model.Name,
                         ImageUrl = model.ImageUrl,
-                        LeagueId = model.LeagueId,
-                        
+                        TeamTypeId = model.TeamTypeId,
                     };
-                    _unit.Team.Add(team);
-                    _unit.Save();
+                    _Unit.League.Add(league);
+                    _Unit.Save();
                     return RedirectToAction("Index");
                 }
                 catch (Exception ex)
@@ -69,8 +62,5 @@ namespace EMart.Controllers
             }
             return View();
         }
-
-
     }
 }
-

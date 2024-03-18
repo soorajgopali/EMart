@@ -20,6 +20,7 @@ namespace EMart.DA.Repository
         public ISpecificRepository Specific { get; private set; }
         public IBrandRepository Brand { get; private set; }
         public IEditionrepository Edition { get; private set; }
+        public ILeagueRepository League { get; private set; }
 
         public UnitOfWork (ApplicationDBContext db)
         {
@@ -31,6 +32,7 @@ namespace EMart.DA.Repository
             Specific = new SpecificRepository(_db);
             Brand = new BrandRepository(_db);
             Edition = new EditionRepository(_db);
+            League = new LeageuRepository(_db);
         }
         public void Save()
         {

@@ -13,7 +13,7 @@ namespace EMart.DA.Repository
     public class TeamRepository : Repository<Team>, ITeamRepository
     {
         private readonly ApplicationDBContext _db;
-        public TeamRepository(ApplicationDBContext db) : base(db) 
+        public TeamRepository(ApplicationDBContext db) : base(db)
         {
             _db = db;
         }
@@ -21,17 +21,16 @@ namespace EMart.DA.Repository
         public List<TeamViewModel> GetList()
         {
             var teamViewModels = (from team in _db.Teams
-                                  join teamType in _db.TeamTypes
-                                  on team.TeamTypeId equals teamType.Id
+                                  join league in _db.Leagues on team.LeagueId equals league.Id
+                                  join teamType in _db.TeamTypes on league.TeamTypeId equals teamType.Id
                                   select new TeamViewModel
                                   {
                                       Id = team.Id,
                                       Name = team.Name,
                                       ImageUrl = team.ImageUrl,
-                                      TeamTypeId = team.TeamTypeId,
+                                      LeagueName = league.Name,
                                       TeamTypeName = teamType.Name
-                                  })
-                            .ToList();
+                                  }).ToList();
 
             return teamViewModels;
         }

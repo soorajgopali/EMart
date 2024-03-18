@@ -1,0 +1,29 @@
+﻿@model List<Player>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Players Index</title>
+</head>
+<body>
+    <h1>Players List</h1>
+    <table class="table table-bordered table-striped">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var player in Model)
+            {
+                <tr>
+                    <td>@player.Id</td>
+                    <td>@player.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

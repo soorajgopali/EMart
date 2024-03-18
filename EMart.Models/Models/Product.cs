@@ -17,7 +17,6 @@ namespace EMart.Models.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string ProductCode { get; set; }
-        public string Brand { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
         public int CategoryId { get; set; }
@@ -25,6 +24,9 @@ namespace EMart.Models.Models
         public Category category { get; set; }
         [ValidateNever]
         public string ImageUrl { get; set; }
+        public int Year { get; set; }
+        public string Season { get; set; }
+
 
     }
 }

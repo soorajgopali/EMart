@@ -1,0 +1,30 @@
+﻿@model List<Edition>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editions Index</title>
+
+</head>
+<body>
+    <h1>Editions List</h1>
+    <table class="table table-bordered table-striped">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var edition in Model)
+            {
+                <tr>
+                    <td>@edition.Id</td>
+                    <td>@edition.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

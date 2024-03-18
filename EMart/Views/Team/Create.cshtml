@@ -1,0 +1,39 @@
+﻿@model TeamViewModel
+
+
+<div class="container mt-5">
+    <h2>Create Team</h2>
+
+    <form method="post" class="mt-4" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label asp-for="@Model.Name" class="control-label"></label>
+            <input asp-for="@Model.Name" class="form-control" />
+            <span asp-validation-for="@Model.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Image" class="control-label"></label>
+            <input asp-for="@Model.Image" class="form-control" />
+            <span asp-validation-for="@Model.Image" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.TeamTypeId" class="control-label"></label>
+            <select asp-for="@Model.TeamTypeId" class="form-control" asp-items="@(new SelectList(ViewBag.TeamTypes, "Id", "Name"))">
+                <option disabled selected>--Select Team Type--</option>
+            </select>
+            <span asp-validation-for="@Model.TeamTypeId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.LeagueId" class="control-label"></label>
+            <select asp-for="@Model.LeagueId" class="form-control" asp-items="@(new SelectList(ViewBag.LeagueTypes, "Id", "Name"))">
+                <option disabled selected>--Select Team Type--</option>
+            </select>
+            <span asp-validation-for="@Model.LeagueId" class="text-danger"></span>
+        </div><br />
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

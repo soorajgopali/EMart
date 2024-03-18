@@ -1,0 +1,29 @@
+﻿@model List<Specific>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Specifics Index</title>
+</head>
+<body>
+    <h1>Players List</h1>
+    <table class="table table-bordered table-striped">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var specific in Model)
+            {
+                <tr>
+                    <td>@specific.Id</td>
+                    <td>@specific.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,29 @@
+﻿@model List<Brand>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Brand Index</title>
+</head>
+<body>
+    <h1>Players List</h1>
+    <table class="table table-bordered table-striped">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var brand in Model)
+            {
+                <tr>
+                    <td>@brand.Id</td>
+                    <td>@brand.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

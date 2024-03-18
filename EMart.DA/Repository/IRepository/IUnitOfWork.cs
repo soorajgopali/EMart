@@ -9,6 +9,14 @@ namespace EMart.DA.Repository.IRepository
     public interface IUnitOfWork
     {
         ICategoryRepository Category { get; }
+
+        ITeamTypeRepository TeamType { get; }
+        ITeamRepository Team { get; }
+        IPlayerRepository Player { get; }
+        ISpecificRepository Specific { get; }
+        IBrandRepository Brand { get; }
+        IEditionrepository Edition { get; }
+        ILeagueRepository League { get; }
         void Save();
     }
 }

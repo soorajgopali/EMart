@@ -21,5 +21,7 @@ namespace EMart.DA.Repository
         {
             _db.Categories.Update(category);
         }
+
+      
     }
 }

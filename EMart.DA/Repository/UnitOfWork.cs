@@ -21,6 +21,8 @@ namespace EMart.DA.Repository
         public IBrandRepository Brand { get; private set; }
         public IEditionrepository Edition { get; private set; }
         public ILeagueRepository League { get; private set; }
+        public IProductRepository Product { get; private set; }
+        public IShoppingCartRepository ShoppingCart { get; private set; }
 
         public UnitOfWork (ApplicationDBContext db)
         {
@@ -33,6 +35,8 @@ namespace EMart.DA.Repository
             Brand = new BrandRepository(_db);
             Edition = new EditionRepository(_db);
             League = new LeageuRepository(_db);
+            Product = new ProductRepository(_db);
+            ShoppingCart = new ShoppingCartRepository(_db);
         }
         public void Save()
         {

@@ -1,4 +1,6 @@
 ﻿using EMart.Models.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EMart.DA.Data
 {
-    public class ApplicationDBContext : DbContext
+    public class ApplicationDBContext : IdentityDbContext<IdentityUser>
     {
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
         {
@@ -22,6 +24,9 @@ namespace EMart.DA.Data
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Edition> Editions { get; set; }
         public DbSet<League> Leagues { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<ShoppingCart> shoppingCarts { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -84,14 +89,16 @@ namespace EMart.DA.Data
                 new Player { Id = 47, Name = "Angel Di Maria" },
                 new Player { Id = 48, Name = "Alex Telles" },
                 new Player { Id = 49, Name = "Marquinhos" },
-                new Player { Id = 50, Name = "Gerard Piqué" }
+                new Player { Id = 50, Name = "Gerard Piqué" },
+                new Player { Id = 51, Name = "None" }
             );
 
 
             modelBuilder.Entity<Specific>().HasData(
                 new Specific { Id = 1, Name = "Vintage" },
                 new Specific { Id = 2, Name = "Legend" },
-                new Specific { Id = 3, Name = "Hero" }
+                new Specific { Id = 3, Name = "Hero" },
+                new Specific { Id = 4, Name = "None" }
             );
 
 
@@ -100,14 +107,16 @@ namespace EMart.DA.Data
                 new Brand { Id = 2, Name = "Nike" },
                 new Brand { Id = 3, Name = "Puma" },
                 new Brand { Id = 4, Name = "Under Armour" },
-                new Brand { Id = 5, Name = "New Balance" }
+                new Brand { Id = 5, Name = "New Balance" },
+                new Brand { Id = 6, Name = "None" }
             );
 
 
             modelBuilder.Entity<Edition>().HasData(
                new Edition { Id = 1, Name = "World Cup" },
                new Edition { Id = 2, Name = "Champions League" },
-               new Edition { Id=3, Name="New Collection"}
+               new Edition { Id=3, Name="New Collection"},
+               new Edition { Id=4, Name="None"}
            );
 
 

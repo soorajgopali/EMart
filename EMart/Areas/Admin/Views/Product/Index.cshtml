@@ -1,0 +1,44 @@
+﻿@model List<ProductViewModel>
+
+<h2>Products</h2>
+    <a asp-controller="Product" asp-action="Create" class="btn btn-primary">Create</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Product Code</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Brand</th>
+            <th>Edition</th>
+            <th>Player</th>
+            <th>Specific</th>
+            <th>Image Url</th>
+            <th>Year</th>
+            <th>Season</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Title</td>
+                <td>@product.ProductCode</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>@product.CategoryName</td>
+                <td>@product.BrandName</td>
+                <td>@product.EditionName</td>
+                <td>@product.PlayerName</td>
+                <td>@product.SpecifiName</td>
+                <td><img src="@Url.Content(product.ImageUrl)" alt="@product.Title" width="50"></td>
+                <td>@product.Year</td>
+                <td>@product.Season</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>

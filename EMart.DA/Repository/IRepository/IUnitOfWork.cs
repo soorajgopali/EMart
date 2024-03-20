@@ -17,6 +17,8 @@ namespace EMart.DA.Repository.IRepository
         IBrandRepository Brand { get; }
         IEditionrepository Edition { get; }
         ILeagueRepository League { get; }
+        IProductRepository Product { get; }
+        IShoppingCartRepository ShoppingCart { get; }
         void Save();
     }
 }

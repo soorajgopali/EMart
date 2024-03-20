@@ -20,40 +20,45 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Team" asp-action="Index">Teams</a>
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Player" asp-action="Index">Players</a>
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Team" asp-action="Index">Teams</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Specific" asp-action="Index">Specifics</a>
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Player" asp-action="Index">Players</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Brand" asp-action="Index">Brands</a>
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Specific" asp-action="Index">Specifics</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Edition" asp-action="Index">Editions</a>
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Brand" asp-action="Index">Brands</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="League" asp-action="Index">Leagues</a>
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Edition" asp-action="Index">Editions</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="League" asp-action="Index">Leagues</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="Index">Products</a>
                         </li>
                     </ul>
+                    <partial name="_LoginPartial"/>
                 </div>
             </div>
         </nav>

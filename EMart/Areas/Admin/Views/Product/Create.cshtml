@@ -1,0 +1,122 @@
+﻿@model ProductViewModel
+
+<link rel="stylesheet" href="~/css/product.css" />
+
+<div class="container mt-5">
+    <h2>Create Product</h2>
+
+    <form method="post" class="mt-4" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label asp-for="@Model.Title" class="control-label">Title</label>
+            <input asp-for="@Model.Title" class="form-control" />
+            <span asp-validation-for="@Model.Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.ProductCode" class="control-label">Product Code</label>
+            <input asp-for="@Model.ProductCode" class="form-control" />
+            <span asp-validation-for="@Model.ProductCode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Description" class="control-label">Description</label>
+            <textarea asp-for="@Model.Description" class="form-control"></textarea>
+            <span asp-validation-for="@Model.Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Price" class="control-label">Price</label>
+            <input asp-for="@Model.Price" class="form-control" />
+            <span asp-validation-for="@Model.Price" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Year" class="control-label">Year</label>
+            <input asp-for="@Model.Year" class="form-control" />
+            <span asp-validation-for="@Model.Year" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Season" class="control-label">Season</label>
+            <input asp-for="@Model.Season" class="form-control" />
+            <span asp-validation-for="@Model.Season" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Image" class="control-label"></label>
+            <input type="file" asp-for="@Model.Image" class="form-control" />
+            <span asp-validation-for="@Model.Image" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.CategoryId" class="control-label">Category</label>
+            <select asp-for="@Model.CategoryId" class="form-control" asp-items="@(new SelectList(ViewBag.Category,"Id","Name"))">
+                <option value="" disabled selected>Select Category</option>
+            </select>
+            <span asp-validation-for="@Model.CategoryId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.EditionId" class="control-label">Edition</label>
+            <select asp-for="@Model.EditionId" class="form-control">
+                <option value="" disabled selected>Select Edition</option>
+                @foreach (var edition in ViewBag.Edition)
+                {
+                    <option value="@edition.Id">@edition.Name</option>
+                }
+            </select>
+            <span asp-validation-for="@Model.EditionId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.BrandId" class="control-label">Brand</label>
+            <select asp-for="@Model.BrandId" class="form-control">
+                <option value="">Select Brand</option>
+                @foreach (var brand in ViewBag.Brand)
+                {
+                    <option value="@brand.Id">@brand.Name</option>
+                }
+            </select>
+            <span asp-validation-for="@Model.BrandId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.PlayerId" class="control-label">Player</label>
+            <select asp-for="@Model.PlayerId" class="form-control">
+                <option value="" disabled selected>Select Player</option>
+                @foreach (var player in ViewBag.Player)
+                {
+                    <option value="@player.Id">@player.Name</option>
+                }
+            </select>
+            <span asp-validation-for="@Model.PlayerId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.SpecificId" class="control-label">Specific</label>
+            <select asp-for="@Model.SpecificId" class="form-control">
+                <option value="" disabled selected>Select Specific</option>
+                @foreach (var specific in ViewBag.Specific)
+                {
+                    <option value="@specific.Id">@specific.Name</option>
+                }
+            </select>
+            <span asp-validation-for="@Model.SpecificId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.TeamId" class="control-label">Team</label>
+            <select asp-for="@Model.TeamId" class="form-control">
+                <option value="" disabled selected>Select Team</option>
+                @foreach (var team in ViewBag.Team)
+                {
+                    <option value="@team.Id">@team.Name</option>
+                }
+            </select>
+            <span asp-validation-for="TeamId" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>

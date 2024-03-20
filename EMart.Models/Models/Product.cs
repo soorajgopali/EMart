@@ -22,6 +22,27 @@ namespace EMart.Models.Models
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public Category category { get; set; }
+
+        public int BrandId { get; set; }
+        [ForeignKey("BrandId")]
+        public Brand brand { get; set; }
+
+        public int EditionId { get; set; }
+        [ForeignKey("EditionId")]
+        public Edition edition { get; set; }
+
+        public int PlayerId {  get; set; }
+        [ForeignKey("PlayerId")]
+        public Player player { get; set; }
+
+        public int SpecificId { get; set; }
+        [ForeignKey("SpecificId")]
+        public Specific specific { get; set; }
+
+        public int TeamId { get; set; }
+        [ForeignKey("TeamId")]
+        public Team team { get; set; }
+
         [ValidateNever]
         public string ImageUrl { get; set; }
         public int Year { get; set; }

@@ -39,5 +39,13 @@ namespace EMart.Models.Models.ViewModels
 
         public int TeamId { get; set; }
         public string TeamName { get; set;}= string.Empty ;
+
+        public string[] SizeList { get; set; } 
+        public string ProductSize { get; set; }
+        public string SizesId { get; set; }
+        public string SelectedSizeId { get; set; }
+
+        public int count { get; set; }
+        
     }
 }

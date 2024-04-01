@@ -4,6 +4,7 @@ using EMart.DA.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EMart.DA.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240327104355_ProductSizeMigration")]
+    partial class ProductSizeMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -429,256 +432,6 @@ namespace EMart.DA.Migrations
                         },
                         new
                         {
-                            Id = 52,
-                            Name = "Keylor Navas"
-                        },
-                        new
-                        {
-                            Id = 53,
-                            Name = "Sergio Ramos"
-                        },
-                        new
-                        {
-                            Id = 54,
-                            Name = "David Alaba"
-                        },
-                        new
-                        {
-                            Id = 55,
-                            Name = "Luis Suárez"
-                        },
-                        new
-                        {
-                            Id = 56,
-                            Name = "Marco Reus"
-                        },
-                        new
-                        {
-                            Id = 57,
-                            Name = "Fabinho"
-                        },
-                        new
-                        {
-                            Id = 58,
-                            Name = "Kai Havertz"
-                        },
-                        new
-                        {
-                            Id = 59,
-                            Name = "Angel Di Maria"
-                        },
-                        new
-                        {
-                            Id = 60,
-                            Name = "Edinson Cavani"
-                        },
-                        new
-                        {
-                            Id = 61,
-                            Name = "Lucas Hernández"
-                        },
-                        new
-                        {
-                            Id = 62,
-                            Name = "Memphis Depay"
-                        },
-                        new
-                        {
-                            Id = 63,
-                            Name = "Leroy Sané"
-                        },
-                        new
-                        {
-                            Id = 64,
-                            Name = "Kasper Schmeichel"
-                        },
-                        new
-                        {
-                            Id = 65,
-                            Name = "Koke"
-                        },
-                        new
-                        {
-                            Id = 66,
-                            Name = "Aymeric Laporte"
-                        },
-                        new
-                        {
-                            Id = 67,
-                            Name = "Nicolò Barella"
-                        },
-                        new
-                        {
-                            Id = 68,
-                            Name = "Matthijs de Ligt"
-                        },
-                        new
-                        {
-                            Id = 69,
-                            Name = "Rodrigo Bentancur"
-                        },
-                        new
-                        {
-                            Id = 70,
-                            Name = "Alejandro Gómez"
-                        },
-                        new
-                        {
-                            Id = 71,
-                            Name = "Raphael Varane"
-                        },
-                        new
-                        {
-                            Id = 72,
-                            Name = "Jude Bellingham"
-                        },
-                        new
-                        {
-                            Id = 73,
-                            Name = "Trent Alexander-Arnold"
-                        },
-                        new
-                        {
-                            Id = 74,
-                            Name = "João Cancelo"
-                        },
-                        new
-                        {
-                            Id = 75,
-                            Name = "Dani Carvajal"
-                        },
-                        new
-                        {
-                            Id = 76,
-                            Name = "Casemiro"
-                        },
-                        new
-                        {
-                            Id = 77,
-                            Name = "Erling Haaland"
-                        },
-                        new
-                        {
-                            Id = 78,
-                            Name = "Jack Grealish"
-                        },
-                        new
-                        {
-                            Id = 79,
-                            Name = "Wojciech Szczęsny"
-                        },
-                        new
-                        {
-                            Id = 80,
-                            Name = "Ángel Correa"
-                        },
-                        new
-                        {
-                            Id = 81,
-                            Name = "Lorenzo Insigne"
-                        },
-                        new
-                        {
-                            Id = 82,
-                            Name = "Saul Niguez"
-                        },
-                        new
-                        {
-                            Id = 83,
-                            Name = "Allan Saint-Maximin"
-                        },
-                        new
-                        {
-                            Id = 84,
-                            Name = "N'Golo Kanté"
-                        },
-                        new
-                        {
-                            Id = 85,
-                            Name = "Jorginho"
-                        },
-                        new
-                        {
-                            Id = 86,
-                            Name = "Timo Werner"
-                        },
-                        new
-                        {
-                            Id = 87,
-                            Name = "Ferran Torres"
-                        },
-                        new
-                        {
-                            Id = 88,
-                            Name = "Jamie Vardy"
-                        },
-                        new
-                        {
-                            Id = 89,
-                            Name = "Pierre-Emerick Aubameyang"
-                        },
-                        new
-                        {
-                            Id = 90,
-                            Name = "Karim Benzema"
-                        },
-                        new
-                        {
-                            Id = 91,
-                            Name = "Romelu Lukaku"
-                        },
-                        new
-                        {
-                            Id = 92,
-                            Name = "Jadon Sancho"
-                        },
-                        new
-                        {
-                            Id = 93,
-                            Name = "Gareth Bale"
-                        },
-                        new
-                        {
-                            Id = 94,
-                            Name = "David de Gea"
-                        },
-                        new
-                        {
-                            Id = 95,
-                            Name = "Timo Werner"
-                        },
-                        new
-                        {
-                            Id = 96,
-                            Name = "Sadio Mané"
-                        },
-                        new
-                        {
-                            Id = 97,
-                            Name = "Raphaël Guerreiro"
-                        },
-                        new
-                        {
-                            Id = 98,
-                            Name = "Serge Gnabry"
-                        },
-                        new
-                        {
-                            Id = 99,
-                            Name = "Achraf Hakimi"
-                        },
-                        new
-                        {
-                            Id = 100,
-                            Name = "Yann Sommer"
-                        },
-                        new
-                        {
-                            Id = 101,
-                            Name = "Erling Haaland"
-                        },
-                        new
-                        {
                             Id = 51,
                             Name = "None"
                         });
@@ -784,14 +537,11 @@ namespace EMart.DA.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SessionId")
+                    b.Property<string>("ApplicationUserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("SizeId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("count")
@@ -799,9 +549,9 @@ namespace EMart.DA.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("SizeId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("ShoppingCarts");
                 });
@@ -1264,34 +1014,34 @@ namespace EMart.DA.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EMart.Models.Models.Size", "size")
+                    b.HasOne("EMart.Models.Models.Product", "Sizes")
                         .WithMany()
                         .HasForeignKey("SizesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("product");
+                    b.Navigation("Sizes");
 
-                    b.Navigation("size");
+                    b.Navigation("product");
                 });
 
             modelBuilder.Entity("EMart.Models.Models.ShoppingCart", b =>
                 {
+                    b.HasOne("EMart.Models.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EMart.Models.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EMart.Models.Models.Size", "Size")
-                        .WithMany()
-                        .HasForeignKey("SizeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Product");
-
-                    b.Navigation("Size");
                 });
 
             modelBuilder.Entity("EMart.Models.Models.Team", b =>

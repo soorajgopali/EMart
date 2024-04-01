@@ -8,11 +8,8 @@ using System.Threading.Tasks;
 
 namespace EMart.DA.Repository.IRepository
 {
-    public interface IShoppingCartRepository : IRepository<ShoppingCart>
+    public interface ISizeRepository : IRepository<Size>
     {
-        CartViewModel GetById(int id);
-        void Update(ShoppingCart shoppingCart);
-
-
+        /*List<SizeViewModel> GetList();*/
     }
 }

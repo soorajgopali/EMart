@@ -11,5 +11,7 @@ namespace EMart.DA.Repository.IRepository
     public interface IProductRepository : IRepository<Product>
     {
         List<ProductViewModel> GetList();
+
+        ProductViewModel GetById(int id);
     }
 }

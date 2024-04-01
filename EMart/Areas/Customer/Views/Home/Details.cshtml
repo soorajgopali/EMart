@@ -1,24 +1,172 @@
-﻿@model List<ProductViewModel>
+﻿    @model ProductViewModel
 
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-6">
-            <img src="@Model.ImageUrl" class="img-fluid" />
-        </div>
-        <div class="col-lg-6">
-            <h2>@Model.Title</h2>
-            <p>@Model.Description</p>
-            <p>Price: @Model.Price.ToString("c")</p>
-            <form asp-action="AddToCart" asp-controller="Cart">
-                <input type="hidden" asp-for="Id" />
-                <div class="form-group">
-                    <label for="quantity">Quantity:</label>
-                    <input type="number" class="form-control" id="quantity" name="quantity" value="1" min="1" />
+<input type="hidden" id="Id" value="@Model.Id" />
+<input type="hidden" id="SelectedSizeId" value="@Model.SelectedSizeId" />
+<input type="hidden" id="Price" value="@Model.Price" />
+
+<div class="row">
+    <div class="col-lg-6">
+        <img src="@Model.ImageUrl" class="img-fluid" style="max-height: 600px;" />
+    </div>
+    <div class="col-lg-6">
+        <h2>@Model.PlayerName @Model.Title</h2>
+        <div style="padding: 10px; background-color: aliceblue; margin-top:20px">
+            <p style="font-size:30px"><strong>Your Price</strong>: @Model.Price.ToString("c")</p>
+            <div style="font-size: 20px; margin-bottom: 10px;">
+                <strong>Sizes Available:</strong>
+                @foreach (var size in Model.ProductSize.Split(','))
+                {
+                    var sizeId = Model.SizesId == size;
+                    <span id="spnSize" class="size" data-sizename="@size" onclick="updateSelectedSize(this)" style="border: 1px solid black; padding: 5px; margin-right: 5px; cursor: pointer; transition: background-color 0.3s;">
+                        @size
+                    </span>
+                }
+            </div>
+
+            <div class="d-flex align-items-end">
+                <div class="col-2 border-bottom">
+                    <label for="@Model.count" style="background-color: aliceblue; margin-bottom:10px"><strong>Quantity</strong></label>
+                    <input type="number" class="form-control" id="Count" name="count" value="1" />
                 </div>
-                <button type="submit" class="btn btn-primary">Add to Cart</button>
-            </form>
+                <div style="margin-left: 30px;">
+                    <button id="btn_add_to_cart" type="button" class="btn btn-primary" style="padding-left: 100px; padding-right: 100px; background-color: #8A0707;">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <hr style="border-top: 1px solid black; margin-bottom: 20px;">
+            <div id="detailsContainer" style="cursor: pointer;">
+                <h4 style="font-size:30px">
+                    Details
+                    <span id="detailsToggle" class="toggle-icon" style="margin-left: 1rem;">+</span>
+                </h4>
+            </div>
+            <ul id="detailsList" style="font-size: 25px; display: none;">
+                <li><strong>Product Code:</strong> @Model.ProductCode</li>
+                <li><strong>Brand:</strong> @Model.BrandName</li>
+                <li><strong>Year:</strong> @Model.Year</li>
+                <li><strong>Season:</strong> @Model.Season</li>
+            </ul>
+        </div>
+
+        <div class="mt-4">
+            <hr style="border-top: 1px solid black; margin-bottom: 20px;">
+            <div id="descriptionContainer" style="cursor: pointer;">
+                <h4 style="font-size:30px">
+                    Description
+                    <span id="descriptionToggle" class="toggle-icon" style="margin-left: 1rem;">+</span>
+                </h4>
+            </div>
+            <p id="descriptionContent" style="font-size:20px; display: none;">@Model.Description</p>
         </div>
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    var key = "customerId";
+
+    if (!getLocalStorage(key)) {
+        setLocalStorage(generateUniqueId());
+    }
+
+    function generateUniqueId() {
+        var timestamp = new Date().getTime();
+        var randomNumber = Math.floor(100000 + Math.random() * 900000);
+        var uniqueId = timestamp.toString() + randomNumber.toString();
+        return uniqueId;
+    }
+
+    function setLocalStorage(value) {
+        localStorage.setItem(key, value);
+    }
+
+    function getLocalStorage(key) {
+        return localStorage.getItem(key);
+    }
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var detailsContainer = document.getElementById('detailsContainer');
+        var detailsToggle = document.getElementById('detailsToggle');
+        var detailsList = document.getElementById('detailsList');
+        var descriptionContainer = document.getElementById('descriptionContainer');
+        var descriptionToggle = document.getElementById('descriptionToggle');
+        var descriptionContent = document.getElementById('descriptionContent');
+
+        detailsContainer.addEventListener('click', function () {
+            toggleContent(detailsList, detailsToggle);
+        });
+
+        descriptionContainer.addEventListener('click', function () {
+            toggleContent(descriptionContent, descriptionToggle);
+        });
+
+        function toggleContent(contentElement, toggleElement) {
+            if (contentElement.style.display === 'none') {
+                contentElement.style.display = 'block';
+                toggleElement.textContent = '-';
+            } else {
+                contentElement.style.display = 'none';
+                toggleElement.textContent = '+';
+            }
+        }
+    });
+
+    function updateSelectedSize(ctx) {
+
+        let sizeName = $(ctx).data("sizename");
+        $("#SelectedSizeId").val(sizeName);
+
+        $(".size").css("background-color", "");
+
+        $(ctx).css("background-color", "#8A0707");
+
+        $('#btn_add_to_cart').prop("disabled", false);
+    }
+
+    $(document).ready(function () {
+
+        $('#btn_add_to_cart').prop("disabled", true);
+
+        $("#btn_add_to_cart").click(function (e) {
+
+            e.preventDefault();
+
+            if ($("#Id").val() == null || $("#Id").val() == "") {
+                alert("message");
+                return false;
+            }
+
+            let postingObj = {
+                SessionId: getLocalStorage(key),
+                ProductId: $("#Id").val(),
+                SelectedSize: $("#SelectedSizeId").val(),
+                Count: $("#Count").val(),
+                Price: $("#Price").val()
+            };
+
+
+            let ajaxReq = $.ajax({
+                url: '/Customer/Home/AddCart',
+                method: 'POST',
+                data: postingObj,
+            });
+            ajaxReq.done(function (data) {
+
+                alert("Item added to cart successfully!");
+
+            })
+            ajaxReq.fail(function (xhr, status, error) {
+                // Code to handle failure
+                alert("AJAX request failed:", error);
+            });
+        });
+    });
+
+</script>
+
+
 

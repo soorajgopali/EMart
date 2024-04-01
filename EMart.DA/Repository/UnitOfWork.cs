@@ -23,6 +23,8 @@ namespace EMart.DA.Repository
         public ILeagueRepository League { get; private set; }
         public IProductRepository Product { get; private set; }
         public IShoppingCartRepository ShoppingCart { get; private set; }
+        public ISizeRepository Size { get; private set; }
+        public IProductsizeRepository Productsize { get; private set; }
 
         public UnitOfWork (ApplicationDBContext db)
         {
@@ -37,6 +39,8 @@ namespace EMart.DA.Repository
             League = new LeageuRepository(_db);
             Product = new ProductRepository(_db);
             ShoppingCart = new ShoppingCartRepository(_db);
+            Size = new SizeRepository(_db);
+            Productsize = new ProductsizeRepository(_db);
         }
         public void Save()
         {

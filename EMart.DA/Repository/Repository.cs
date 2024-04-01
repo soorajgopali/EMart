@@ -1,8 +1,10 @@
 ﻿using EMart.DA.Data;
 using EMart.DA.Repository.IRepository;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -19,9 +21,13 @@ namespace EMart.DA.Repository
             _db = db;
             this.dbSet = _db.Set<T>();
         }
-        public void Add(T entity)
+
+        public T Add(T entity)
         {
             dbSet.Add(entity);
+            _db.SaveChanges();
+
+            return entity;
         }
 
         public T Get(Expression<Func<T, bool>> predicate)
@@ -29,6 +35,11 @@ namespace EMart.DA.Repository
             IQueryable<T> query = dbSet;
             query = query.Where(predicate);
             return query.FirstOrDefault();
+        }
+
+        public IEnumerable<T> Execute(string sql, SqlParameter[] parameters)
+        {
+            return _db.Set<T>().FromSqlRaw(sql, parameters).ToList();
         }
 
         public IEnumerable<T> GetAll()

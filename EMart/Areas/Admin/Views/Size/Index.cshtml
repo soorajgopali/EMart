@@ -1,0 +1,28 @@
+﻿@model List<SizeViewModel>
+
+<h2>Sizes</h2>
+<a asp-controller="Size" asp-action="Create" class="btn btn-primary">Create</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Size</th>
+            <th>Is Active</th>
+            <th>Product Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var size in Model)
+        {
+            <tr>
+                <td>@size.Sizes</td>
+                <td>@(size.IsActive ? "Yes" : "No")</td>
+                <td>
+                    <a asp-controller="Size" asp-action="Edit" asp-route-id="@size.Id" class="btn btn-primary">Edit</a>
+                    <a asp-controller="Size" asp-action="Delete" asp-route-id="@size.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -34,6 +34,8 @@ namespace EMart.Areas.Admin.Controllers
             ViewBag.Player = _unit.Player.GetAll().ToList();
             ViewBag.Specific = _unit.Specific.GetAll().ToList();
             ViewBag.Team = _unit.Team.GetAll().ToList();
+            ViewBag.Size = _unit.Size.GetAll().ToList();
+
             return View();
         }
 
@@ -72,8 +74,21 @@ namespace EMart.Areas.Admin.Controllers
                         Year = model.Year,
                         Season = model.Season,
                     };
-                    _unit.Product.Add(product);
-                    _unit.Save();
+
+                    int insertedId = _unit.Product.Add(product).Id;
+                    if (model.SizeList != null && model.SizeList.Length > 0)
+                    {
+                        foreach (var selectedValue in model.SizeList)
+                        {
+                            var productSize = new ProductSize();
+                            productSize.Id = 0;
+                            productSize.ProductId = insertedId;
+                            productSize.SizesId = Convert.ToInt32(selectedValue);
+                             
+                            _unit.Productsize.Add(productSize);
+                        }
+                    }
+
                     return RedirectToAction("Index");
                 }
                 catch (Exception ex)
@@ -83,5 +98,7 @@ namespace EMart.Areas.Admin.Controllers
             }
             return View(model);
         }
+
+
     }
 }

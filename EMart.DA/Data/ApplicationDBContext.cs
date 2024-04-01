@@ -26,7 +26,9 @@ namespace EMart.DA.Data
         public DbSet<League> Leagues { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        public DbSet<ShoppingCart> shoppingCarts { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<Size> Sizes { get; set; }
+        public DbSet<ProductSize> ProductSizes { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -90,8 +92,59 @@ namespace EMart.DA.Data
                 new Player { Id = 48, Name = "Alex Telles" },
                 new Player { Id = 49, Name = "Marquinhos" },
                 new Player { Id = 50, Name = "Gerard Piqué" },
-                new Player { Id = 51, Name = "None" }
-            );
+                new Player { Id = 52, Name = "Keylor Navas" },
+new Player { Id = 53, Name = "Sergio Ramos" },
+new Player { Id = 54, Name = "David Alaba" },
+new Player { Id = 55, Name = "Luis Suárez" },
+new Player { Id = 56, Name = "Marco Reus" },
+new Player { Id = 57, Name = "Fabinho" },
+new Player { Id = 58, Name = "Kai Havertz" },
+new Player { Id = 59, Name = "Angel Di Maria" },
+new Player { Id = 60, Name = "Edinson Cavani" },
+new Player { Id = 61, Name = "Lucas Hernández" },
+new Player { Id = 62, Name = "Memphis Depay" },
+new Player { Id = 63, Name = "Leroy Sané" },
+new Player { Id = 64, Name = "Kasper Schmeichel" },
+new Player { Id = 65, Name = "Koke" },
+new Player { Id = 66, Name = "Aymeric Laporte" },
+new Player { Id = 67, Name = "Nicolò Barella" },
+new Player { Id = 68, Name = "Matthijs de Ligt" },
+new Player { Id = 69, Name = "Rodrigo Bentancur" },
+new Player { Id = 70, Name = "Alejandro Gómez" },
+new Player { Id = 71, Name = "Raphael Varane" },
+new Player { Id = 72, Name = "Jude Bellingham" },
+new Player { Id = 73, Name = "Trent Alexander-Arnold" },
+new Player { Id = 74, Name = "João Cancelo" },
+new Player { Id = 75, Name = "Dani Carvajal" },
+new Player { Id = 76, Name = "Casemiro" },
+new Player { Id = 77, Name = "Erling Haaland" },
+new Player { Id = 78, Name = "Jack Grealish" },
+new Player { Id = 79, Name = "Wojciech Szczęsny" },
+new Player { Id = 80, Name = "Ángel Correa" },
+new Player { Id = 81, Name = "Lorenzo Insigne" },
+new Player { Id = 82, Name = "Saul Niguez" },
+new Player { Id = 83, Name = "Allan Saint-Maximin" },
+new Player { Id = 84, Name = "N'Golo Kanté" },
+new Player { Id = 85, Name = "Jorginho" },
+new Player { Id = 86, Name = "Timo Werner" },
+new Player { Id = 87, Name = "Ferran Torres" },
+new Player { Id = 88, Name = "Jamie Vardy" },
+new Player { Id = 89, Name = "Pierre-Emerick Aubameyang" },
+new Player { Id = 90, Name = "Karim Benzema" },
+new Player { Id = 91, Name = "Romelu Lukaku" },
+new Player { Id = 92, Name = "Jadon Sancho" },
+new Player { Id = 93, Name = "Gareth Bale" },
+new Player { Id = 94, Name = "David de Gea" },
+new Player { Id = 95, Name = "Timo Werner" },
+new Player { Id = 96, Name = "Sadio Mané" },
+new Player { Id = 97, Name = "Raphaël Guerreiro" },
+new Player { Id = 98, Name = "Serge Gnabry" },
+new Player { Id = 99, Name = "Achraf Hakimi" },
+new Player { Id = 100, Name = "Yann Sommer" },
+new Player { Id = 101, Name = "Erling Haaland" },
+new Player { Id = 51, Name = "None" }
+
+                  );
 
 
             modelBuilder.Entity<Specific>().HasData(
@@ -115,8 +168,18 @@ namespace EMart.DA.Data
             modelBuilder.Entity<Edition>().HasData(
                new Edition { Id = 1, Name = "World Cup" },
                new Edition { Id = 2, Name = "Champions League" },
-               new Edition { Id=3, Name="New Collection"},
-               new Edition { Id=4, Name="None"}
+               new Edition { Id = 3, Name = "New Collection" },
+               new Edition { Id = 4, Name = "None" }
+           );
+
+            modelBuilder.Entity<Size>().HasData(
+               new Size { Id = 1, Sizes = "XS", IsActive = true },
+               new Size { Id = 2, Sizes = "S", IsActive = true },
+               new Size { Id = 3, Sizes = "M", IsActive = true },
+               new Size { Id = 4, Sizes = "L", IsActive = true },
+               new Size { Id = 5, Sizes = "XL", IsActive = true },
+               new Size { Id = 6, Sizes = "2XL", IsActive = true },
+               new Size { Id = 7, Sizes = "3XL", IsActive = true }
            );
 
 

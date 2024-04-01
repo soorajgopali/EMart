@@ -1,5 +1,7 @@
 ﻿using EMart.DA.Repository.IRepository;
+using EMart.Models.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace EMart.Areas.Customer.Controllers
 {
@@ -11,9 +13,19 @@ namespace EMart.Areas.Customer.Controllers
         {
             _unit = unit;
         }
-        public IActionResult Index()
+/*
+        [HttpPost]
+        public IActionResult Index(CartViewModel model)
         {
-            return View();
-        }
+            if(ModelState.IsValid)
+            {
+            var cartViewModelById = _unit.ShoppingCart.GetById(model.Id);
+                return RedirectToAction("Index", "Cart");
+            }
+            else
+            {
+            return View(model);
+            }
+        }*/
     }
 }

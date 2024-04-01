@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EMart.Models.Models.ViewModels;
+using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -11,7 +13,10 @@ namespace EMart.DA.Repository.IRepository
     {
         IEnumerable<T> GetAll();
         T Get(Expression<Func<T, bool>> predicate);
-        void Add(T entity);
+        //void Add(T entity);
+
+        IEnumerable<T> Execute(string sql, params SqlParameter[] parameters);
+        T Add(T entity);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);
     }

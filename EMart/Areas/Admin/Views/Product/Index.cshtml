@@ -18,6 +18,7 @@
             <th>Image Url</th>
             <th>Year</th>
             <th>Season</th>
+            <th>Sizes</th>
             
         </tr>
     </thead>
@@ -37,6 +38,7 @@
                 <td><img src="@Url.Content(product.ImageUrl)" alt="@product.Title" width="50"></td>
                 <td>@product.Year</td>
                 <td>@product.Season</td>
+                <td>@product.ProductSize</td>
                 
             </tr>
         }

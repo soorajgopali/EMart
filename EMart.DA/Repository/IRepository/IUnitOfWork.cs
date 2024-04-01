@@ -19,6 +19,8 @@ namespace EMart.DA.Repository.IRepository
         ILeagueRepository League { get; }
         IProductRepository Product { get; }
         IShoppingCartRepository ShoppingCart { get; }
+        ISizeRepository Size { get; }
+        IProductsizeRepository Productsize { get; }
         void Save();
     }
 }

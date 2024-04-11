@@ -3,11 +3,14 @@ using EMart.Models;
 using EMart.Models.Models;
 using EMart.Models.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Claims;
-
+using System.Linq;
+using EMart.DA.Repository;
 namespace EMart.Areas.Customer.Controllers
+
 {
     [Area("Customer")]
     public class HomeController : Controller
@@ -23,13 +26,15 @@ namespace EMart.Areas.Customer.Controllers
             _unit = unit;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string netUser = "")
         {
             var parentModel = new ParentViewModel
             {
                 productList = _unit.Product.GetList(),
                 LeagueList = _unit.League.GetList()
             };
+            ViewBag.IsUserLogin = netUser;
+            ViewBag.CustomerId = _httpContextAccessor.HttpContext.Session.GetString("customerId");
             return View(parentModel);
         }
 
@@ -67,7 +72,7 @@ namespace EMart.Areas.Customer.Controllers
                     _unit.ShoppingCart.Add(cart);
                 }
 
-                return Json(new { success = true, message = "Cart updated successfully." });
+                return Json(new { success = true, message = "Item added to cart successfully!" });
             }
             catch (Exception)
             {
@@ -75,6 +80,20 @@ namespace EMart.Areas.Customer.Controllers
             }
         }
 
+
+
+        public IActionResult GetCartCount(string sessionId)
+        {
+            try
+            {
+                int totalQuantity = _unit.ShoppingCart.GetCartCount(sessionId);
+                return Json(new { success = true, count = totalQuantity });
+            }
+            catch (Exception)
+            {
+                return Json(new { success = false });
+            }
+        }
 
 
         public IActionResult Privacy()

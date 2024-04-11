@@ -17,5 +17,11 @@ namespace EMart.Models.Models
         public string? State { get; set; }
         public string? PostalCode { get; set; }
 
+        [Display(Name = "Phone")]
+        public string? Contact { get; set; }
+
+        [Display(Name = "Email")]
+        public string? UserEmail { get; set; }
+
     }
 }

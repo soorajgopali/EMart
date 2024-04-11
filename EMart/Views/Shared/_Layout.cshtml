@@ -1,93 +1,174 @@
-﻿    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - EMart</title>
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/EMart.styles.css" asp-append-version="true" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
-    </head>
-    <body>
-        <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <div class="container-fluid">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EMart</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EMart</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EMart.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EMart</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Team" asp-action="Index">Teams</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Team" asp-action="Index">Teams</a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Player" asp-action="Index">Players</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Player" asp-action="Index">Players</a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Specific" asp-action="Index">Specifics</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Specific" asp-action="Index">Specifics</a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Brand" asp-action="Index">Brands</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Brand" asp-action="Index">Brands</a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Edition" asp-action="Index">Editions</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Edition" asp-action="Index">Editions</a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="League" asp-action="Index">Leagues</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="League" asp-action="Index">Leagues</a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="Index">Products</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="Index">Products</a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Size" asp-action="Index">Sizes</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Size" asp-action="Index">Sizes</a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <partial name="_LoginPartial"/>
-                    </div>
+                        <li class="nav-item">
+                            <a id="cart-link" class="nav-link text-dark" asp-area="Customer" asp-controller="Cart" asp-action="CartItems" style="position: relative;">
+                                <div style="position: relative; background-color: #8A0707; display: inline-block; padding: 10px; width: 55px; height: 40px;">
+                                    <span id="cart-count" class="badge badge-pill badge-danger" style="position: absolute; top: 5px; right: 15px; z-index: 1; color: black; background-color: #FFFFFF; width: 20px; height: 20px; border-radius: 50%; text-align: center; line-height: 20px; display: flex; justify-content: center; align-items: center;">0</span>
+                                    <i class="fas fa-shopping-cart" style="color: white;"></i>
+                                </div>
+                            </a>
+                        </li>
+
+
+
+                    </ul>
+                    <partial name="_LoginPartial" />
                 </div>
-            </nav>
-        </header>
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
-
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2024 - EMart - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
-        </footer>
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        @await RenderSectionAsync("Scripts", required: false)
-    </body>
-    </html>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - EMart - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+
+<script>
+    var key = "customerId";
+
+    function toFloat(val) {
+        if (val === "" || val === 0 || isNaN(val) || val === undefined) {
+            return 0;
+        } else {
+            return parseFloat(val);
+        }
+    }
+
+    $(document).ready(function () {
+
+        updateCartCount();
+        var sId = getLocalStorage(key);
+        if (sId == null) {
+            var uId = generateUniqueId();
+            setLocalStorage(uId)
+        }
+    });
+
+
+    function generateUniqueId() {
+        var timestamp = new Date().getTime();
+        var randomNumber = Math.floor(100000 + Math.random() * 900000);
+        var uniqueId = timestamp.toString() + randomNumber.toString();
+        return uniqueId;
+    }
+
+    function setLocalStorage(value) {
+        localStorage.setItem(key, value);
+    }
+
+    function getLocalStorage(key) {
+        return localStorage.getItem(key);
+    }
+
+    function updateCartIcon(totalQuantity) {
+        $('#cart-count').text(totalQuantity);
+    }
+
+    function updateCartCount() {
+        let sessionId = getLocalStorage(key);
+
+        $.ajax({
+            url: '/Customer/Home/GetCartCount',
+            method: 'GET',
+            data: { sessionId: sessionId },
+            success: function (data) {
+                updateCartIcon(data.count);
+            },
+            error: function (xhr, status, error) {
+                console.error("An error occurred while retrieving cart count:", error);
+            }
+        });
+    }
+
+    $("#cart-link").click(function (event) {
+        event.preventDefault();
+        var sessionId = getLocalStorage("customerId");
+        if (!sessionId) {
+            sessionId = generateUniqueId();
+            setLocalStorage(sessionId);
+        }
+        var form = $('<form action="/Customer/Cart/CartItems" method="post">' +
+            '<input type="hidden" name="sessionId" value="' + sessionId + '" />' +
+            '</form>');
+        $('body').append(form);
+        form.submit();
+    });
+
+
+</script>

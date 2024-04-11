@@ -14,6 +14,10 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
+using EMart.Models.Models;
+using EMart.DA.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace EMart.Areas.Identity.Pages.Account
 {
@@ -21,11 +25,18 @@ namespace EMart.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ApplicationDBContext _db;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger, UserManager<IdentityUser> userManager, IHttpContextAccessor httpContextAccessor, ApplicationDBContext dBContext)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
+            _db = dBContext;
+
         }
 
         /// <summary>
@@ -82,6 +93,7 @@ namespace EMart.Areas.Identity.Pages.Account
             /// </summary>
             [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }
+            public string TempSessionId { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -109,13 +121,21 @@ namespace EMart.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    var netUser = "0";
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    if (user != null)
+                    {
+                        UpdateSessionId(user.Id, Input.TempSessionId);
+                        _httpContextAccessor.HttpContext.Session.SetString("customerId", user.Id);
+                        netUser = "1";
+
+                    }
+
+                    return LocalRedirect(returnUrl + "?netUser=" + netUser);
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -135,6 +155,25 @@ namespace EMart.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        private void UpdateSessionId(string userId,string oldSessionId)
+        {
+            try
+            {
+                var shoppingCart = _db.ShoppingCarts.Where(u => u.SessionId == oldSessionId);
+
+                foreach (var entry in shoppingCart)
+                {
+                    entry.SessionId = userId;
+                    _db.Update(entry);
+                }
+                _db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

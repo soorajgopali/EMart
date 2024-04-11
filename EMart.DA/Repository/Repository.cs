@@ -29,6 +29,27 @@ namespace EMart.DA.Repository
 
             return entity;
         }
+        public T Update(T entity)
+        {
+            var primaryKey = _db.Model.FindEntityType(typeof(T)).FindPrimaryKey().Properties.FirstOrDefault();
+
+            if (primaryKey != null)
+            {
+                var keyValue = entity.GetType().GetProperty(primaryKey.Name).GetValue(entity);
+
+                var existingEntity = _db.Set<T>().Find(keyValue);
+
+                if (existingEntity != null)
+                {
+                    _db.Entry(existingEntity).CurrentValues.SetValues(entity);
+
+                    _db.SaveChanges();
+                }
+            }
+
+            return entity;
+        }
+
 
         public T Get(Expression<Func<T, bool>> predicate)
         {

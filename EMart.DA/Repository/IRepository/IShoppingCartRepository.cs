@@ -13,6 +13,10 @@ namespace EMart.DA.Repository.IRepository
         CartViewModel GetById(int id);
         void Update(ShoppingCart shoppingCart);
 
+        int GetCartCount(string sessionId);
+
+        IEnumerable<CartViewModel> GetCartItems(string sessionId);
+
 
     }
 }

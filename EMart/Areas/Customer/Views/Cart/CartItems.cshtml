@@ -1,0 +1,272 @@
+﻿@model IEnumerable<CartViewModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @@keyframes pulse {
+            0% {
+                background-color: lightblue;
+            }
+
+            50% {
+                background-color: yellow;
+            }
+
+            100% {
+                background-color: lightblue;
+            }
+        }
+
+        .animated {
+            animation-name: pulse;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+        }
+
+        .cart-item {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .cart-item-img {
+            max-width: 100px;
+            margin-right: 10px;
+        }
+
+        .cart-item-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price {
+            text-align: right;
+        }
+
+        .order-summary {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1>Your Items</h1>
+
+                @if (!Model.Any())
+                {
+
+                }
+                else
+                {
+                    @foreach (var item in Model)
+                    {
+                        <div class="cart-item position-relative main-cart">
+
+                            <div class="cart-item position-relative" style="border: none;">
+                                <button onclick="removeCart(this);" class="btn btn-link position-absolute top-0 end-0 mt-2 me-3" style="font-size: 14px; padding: 0; cursor: pointer;" data-cart-id="@item.CartId">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img src="@item.ImageUrl" alt="Product Image" class="cart-item-img">
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="cart-item-details">
+                                        <div>@item.Season @item.Player @item.Title</div>
+                                        <div>
+                                            <span class="mr-2">Size</span>
+                                            <select class="Size form-control mr-2" data-product-id="@item.ProductId" data-selected-size="@item.SelectedSize" style="width: 70px;">
+                                                @foreach (var size in item.AvailableSizes.Split(", "))
+                                                {
+                                                    <option value="@size" selected="@(size == item.SelectedSize)">@size</option>
+                                                }
+                                            </select>
+                                            <span class="mr-2">Quantity</span>
+                                            <input type="number" class="Quantity form-control" data-product-id="@item.ProductId" value="@item.Count" style="width: 55px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-between">
+                                <div class="col-md-6 cart-item-details"></div>
+                                <div class="col-md-6 text-right">
+                                    <div>
+                                        $ <span class="total-price">@(item.Price * item.Count)</span>
+                                    </div>
+                                    <div>
+                                        each $ <span class="each-price">@(item.Price)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" class="CartId" value="@item.CartId" />
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-md-4 mt-5 border border-secondary p-3" style=" height: fit-content;">
+                <div class="order-summary">
+                    <h2>Order Summary</h2>
+                    <div>Total Items: <span id="total_items">@(Model.Sum(item => item.Count))</span> </div>
+                    <div>Total Price: <span id="total_price">$@(Model.Sum(item => item.Price * item.Count))</span></div>
+                </div>
+                <a id="checkoutButton" asp-area="Customer" asp-controller="CheckOutController" asp-action="Index" class="btn btn-primary mt-3 w-100" style="background-color: #8A0707;">
+                    <i class="fas fa-lock"></i> Checkout
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            updateOrderSummary();
+            $('.Size').change(function () {
+                var cartRow = $(this).closest('.cart-item');
+
+                cartRow.css('background-color', 'lightblue');
+
+                var cartId = cartRow.find('.CartId').val();
+                var newSize = $(this).val();
+
+                $.ajax({
+                    url: '/Customer/Cart/UpdateSize',
+                    type: 'POST',
+                    data: { cartId: cartId, newSize: newSize },
+                    success: function (response) {
+                        console.log(response);
+
+                        setTimeout(function () {
+                            cartRow.css('background-color', '');
+                        }, 1000);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+
+                        cartRow.css('background-color', '');
+                    }
+                });
+            });
+
+
+            $('.Quantity').change(function () {
+                var cartRow = $(this).closest('.cart-item');
+                var totalPriceElement = cartRow.find('.total-price');
+
+                cartRow.addClass('animated');
+
+                var cartId = cartRow.find('.CartId').val();
+                var newQuantity = $(this).val();
+
+                $.ajax({
+                    url: '/Customer/Cart/UpdateQuantity',
+                    type: 'POST',
+                    data: { cartId: cartId, newQuantity: newQuantity },
+                    success: function (response) {
+                        console.log(response);
+
+                        if (response.success) {
+                            totalPriceElement.text('$' + response.totalPrice.toFixed(2));
+                        } else {
+                            console.error(response.message);
+                        }
+
+                        setTimeout(function () {
+                            cartRow.removeClass('animated');
+                        }, 1000);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                        cartRow.removeClass('animated');
+                    }
+                });
+            });
+        });
+
+        function updateOrderSummary() {
+            let totalItems = parseInt($("#total_items").text());
+            if (totalItems === 0) {
+                $(".order-summary").closest('.col-md-4').remove();
+                displayEmptyCartMessage();
+            }
+        }
+
+        function displayEmptyCartMessage() {
+            var emptyCartMessage = $('<div>', {
+                id: 'empty-cart-message',
+                html: '<strong>Your Shopping Cart Is Empty</strong>',
+                style: 'margin-bottom: 10px; display: flex; flex-direction: column; align-items: center;'
+            });
+
+            $('.col-md-8').append(emptyCartMessage);
+
+            var continueShoppingButton = $('<button>', {
+                id: 'continue-shopping-button',
+                class: 'btn btn-primary',
+                text: 'Continue Shopping',
+                style: 'margin-top: 20px; '
+            });
+
+            continueShoppingButton.click(function () {
+                window.location.href = '/Customer/Home/Index';
+            });
+
+            emptyCartMessage.append(continueShoppingButton);
+        }
+
+
+        function removeCart(self) {
+            let cartId = $(self).data('cart-id');
+            if (cartId) {
+                $.ajax({
+                    url: '/Customer/Cart/RemoveItem',
+                    type: 'POST',
+                    data: { cartId: cartId },
+                    async:false,
+                    success: function (response) {
+
+                        $(self).closest('.main-cart').remove();
+
+                        let totalQuantity = 0;
+                        let totalPrice = 0;
+                        $('.cart-item').each(function (key, val) {
+
+                            let quantity = toFloat($(this).find('.Quantity').val());
+                            let price = toFloat($(this).find('.total-price').text());
+
+                            totalQuantity += toFloat(quantity);
+                            totalPrice += toFloat(quantity) * toFloat(price);
+                        });
+
+                        $("#total_items").text(totalQuantity);
+                        $("#cart-count").text(totalQuantity);
+                        $("#total_price").text(totalPrice.toFixed(2));
+
+                        if (totalQuantity === 0) {
+                            $(".order-summary").parent().remove();
+                            displayEmptyCartMessage();
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            }
+        }
+
+        
+
+    </script>
+</body>
+</html>

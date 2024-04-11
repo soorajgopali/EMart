@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<div class="row pb-3"  style="margin-top:100px">
+<div class="row pb-3" style="margin-top:100px">
     @foreach (var product in Model.productList)
     {
         <a asp-controller="Home" asp-action="Details" asp-route-productId="@product.Id" class="col-lg-3 col-sm-6 text-decoration-none">
@@ -50,3 +50,19 @@
         </a>
     }
 </div>
+
+<script>
+    var isUserLogin = '@ViewBag.IsUserLogin';
+    var customerId = '@ViewBag.CustomerId';
+    if (customerId && isUserLogin === '1') {
+        localStorage.setItem("customerId", customerId);
+    }
+
+</script>
+
+@if (TempData.ContainsKey("ClearCustomerId") && (bool)TempData["ClearCustomerId"])
+{
+    <script>
+        localStorage.removeItem("customerId");
+    </script>
+}

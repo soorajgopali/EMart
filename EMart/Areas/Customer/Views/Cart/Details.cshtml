@@ -1,0 +1,32 @@
+﻿@model IEnumerable<CartViewModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart Items</title>
+</head>
+<body>
+    <h1>Cart Items</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Selected Size</th>
+                <th>Count</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProductId</td>
+                    <td>@item.SelectedSize</td>
+                    <td>@item.Count</td>
+                    <td>@item.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

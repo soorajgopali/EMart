@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,5 +17,13 @@ namespace EMart.Models.Models.ViewModels
         public int Count { get; set; }
         public decimal Price { get; set; }
         public string SessionId { get; set; }
+        public string ImageUrl { get; set; } = string.Empty;
+        public string Title { get; set; } 
+        public string Season {  get; set; }
+        public string TeamName { get; set; }
+        public string AvailableSizes { get; set; }
+        public string ProductSize { get; set; }
+        public int CartId { get; set; }
+        public string Player {  get; set; }
     }
 }

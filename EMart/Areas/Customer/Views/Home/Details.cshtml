@@ -66,26 +66,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-    var key = "customerId";
-
-    if (!getLocalStorage(key)) {
-        setLocalStorage(generateUniqueId());
-    }
-
-    function generateUniqueId() {
-        var timestamp = new Date().getTime();
-        var randomNumber = Math.floor(100000 + Math.random() * 900000);
-        var uniqueId = timestamp.toString() + randomNumber.toString();
-        return uniqueId;
-    }
-
-    function setLocalStorage(value) {
-        localStorage.setItem(key, value);
-    }
-
-    function getLocalStorage(key) {
-        return localStorage.getItem(key);
-    }
 
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -115,56 +95,63 @@
         }
     });
 
-    function updateSelectedSize(ctx) {
 
-        let sizeName = $(ctx).data("sizename");
-        $("#SelectedSizeId").val(sizeName);
+        function updateSelectedSize(ctx) {
 
-        $(".size").css("background-color", "");
+            let sizeName = $(ctx).data("sizename");
+            $("#SelectedSizeId").val(sizeName);
 
-        $(ctx).css("background-color", "#8A0707");
+            $(".size").css("background-color", "");
 
-        $('#btn_add_to_cart').prop("disabled", false);
-    }
+            $(ctx).css("background-color", "#8A0707");
 
-    $(document).ready(function () {
+            $('#btn_add_to_cart').prop("disabled", false);
+        }
 
-        $('#btn_add_to_cart').prop("disabled", true);
+        $(document).ready(function () {
 
-        $("#btn_add_to_cart").click(function (e) {
+            $('#btn_add_to_cart').prop("disabled", true);
 
-            e.preventDefault();
+            $("#btn_add_to_cart").click(function (e) {
 
-            if ($("#Id").val() == null || $("#Id").val() == "") {
-                alert("message");
-                return false;
-            }
+                e.preventDefault();
 
-            let postingObj = {
-                SessionId: getLocalStorage(key),
-                ProductId: $("#Id").val(),
-                SelectedSize: $("#SelectedSizeId").val(),
-                Count: $("#Count").val(),
-                Price: $("#Price").val()
-            };
+                if ($("#Id").val() == null || $("#Id").val() == "") {
+                    alert("message");
+                    return false;
+                }
+
+                let postingObj = {
+                    SessionId: getLocalStorage(key),
+                    ProductId: $("#Id").val(),
+                    SelectedSize: $("#SelectedSizeId").val(),
+                    Count: $("#Count").val(),
+                    Price: $("#Price").val()
+                };
 
 
-            let ajaxReq = $.ajax({
-                url: '/Customer/Home/AddCart',
-                method: 'POST',
-                data: postingObj,
-            });
-            ajaxReq.done(function (data) {
+                let ajaxReq = $.ajax({
+                    url: '/Customer/Home/AddCart',
+                    method: 'POST',
+                    data: postingObj,
+                });
+                ajaxReq.done(function (data) {
+                    if (data.success) {
+                        alert(data.message);
 
-                alert("Item added to cart successfully!");
+                        //updateCartCount();
 
-            })
-            ajaxReq.fail(function (xhr, status, error) {
-                // Code to handle failure
-                alert("AJAX request failed:", error);
+                        window.location.replace('/Customer/Home/Index');
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                ajaxReq.fail(function (xhr, status, error) {
+                    // Code to handle failure
+                    alert("AJAX request failed:", error);
+                });
             });
         });
-    });
 
 </script>
 

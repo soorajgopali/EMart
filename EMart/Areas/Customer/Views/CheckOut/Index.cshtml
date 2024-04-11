@@ -1,0 +1,87 @@
+﻿@model EMart.Models.Models.ApplicationUser
+
+<div class="container">
+
+    @if (User == null || !User.Identity.IsAuthenticated)
+    {
+        <div class="container text-center mx-auto">
+            <div class="bg-light p-3">
+                <p>Already have an account?</p>
+                <a href="/Identity/Account/Login" class="text-decoration-none">LOG IN</a> or <a href="/Identity/Account/Register" class="text-decoration-none">REGISTER</a>
+            </div>
+        </div>
+    }
+    <h1>Shipping Address</h1>
+    </div>
+    <form asp-action="Register" method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="UserEmail" class="control-label">Email</label>
+                    <input asp-for="UserEmail" class="form-control" />
+                    <span asp-validation-for="UserEmail" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="Contact" class="control-label">Phone</label>
+                    <input asp-for="Contact" class="form-control" />
+                    <span asp-validation-for="Contact" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label asp-for="StreetAddress" class="control-label">Street Address</label>
+                    <input asp-for="StreetAddress" class="form-control" />
+                    <span asp-validation-for="StreetAddress" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label asp-for="PostalCode" class="control-label">Postal Code</label>
+                    <input asp-for="PostalCode" class="form-control" />
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label asp-for="City" class="control-label">City</label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="State" class="control-label">State</label>
+                    <input asp-for="State" class="form-control" />
+                    <span asp-validation-for="State" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <br />
+        <!-- Add other properties here -->
+        <div class="row">
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+        </div>
+    </form>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

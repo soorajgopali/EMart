@@ -1,0 +1,117 @@
+﻿@model UserProfileWithShoppingCartViewModel
+
+<h1 style="border-bottom: 1px solid #ccc; width: 46%;padding-bottom: 20px;">Secure Checkout</h1>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <br />
+        <br />
+
+        <h3>Shipping Address</h3>
+
+        <div style="max-width: 600px;">
+            <div class="card-body">
+                <p>@Model.Name</p>
+                <p>@Model.Contact</p>
+                <p>@Model.City</p>
+                <a asp-controller="CheckOut" asp-action="Shipping" asp-route-id="@Model.userId" class="btn btn-outline-primary">Edit</a>
+            </div>
+        </div>
+
+        <br />
+        <br />
+
+        <h3>Payment</h3>
+
+        <form>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="paymentMethod" id="cashOnDelivery" value="cash">
+                <label class="form-check-label" for="cashOnDelivery">
+                    <img src="/Images/cod.png" alt="Cash on Delivery" width="100" height="100">
+                </label>
+            </div>
+        </form>
+
+        <br />
+        <br />
+        
+
+        <small>By placing an order, you agree to our <a href="#">Terms of use</a> & <a href="#">Privacy</a></small> <br />
+        <br />
+        <a id="checkoutButton" asp-area="Customer" asp-controller="CheckOut" asp-action="OrderComplete" class="btn btn-primary" style="width:60%; max-width:400px; background-color: #8A0707;">
+            <i class="fas fa-lock"></i> Place Order
+        </a>
+    </div>
+
+    <div class="col-md-4" style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
+        @{
+            decimal itemTotal = 0;
+            foreach (var cartItem in Model.CartItems)
+            {
+                itemTotal += cartItem.Count * cartItem.Price;
+            }
+
+            decimal totalAmount = itemTotal + 5;
+        }
+
+        <h3 style="border-bottom: 1px solid #ccc; width: 100%; margin-bottom: 20px; padding-bottom: 20px;">Order Summary</h3>
+
+        <div>
+            <div class="item-total">
+                <p>Item Total <span style="float:right;">$@itemTotal</span> </p>
+                @*  <div style="display:flex;">
+                <div style="width:60%">Item Total</div>
+                <div style="width:40%; text-align :right;">$@itemTotal</div>
+                </div> *@
+            </div>
+            <div class="shipping-charge">
+                <p>Shipping Charge <span style="float:right;">$5.00</span></p>
+            </div>
+            <div class="total-amount">
+                <h3>Total  <span style="float:right;">$@totalAmount</span></h3>
+                <small>Includes shipping</small>
+            </div>
+
+        </div>
+        <br />
+        <br />
+
+        <h3 style="border-bottom: 1px solid #ccc; width: 100%; margin-bottom: 20px; padding-bottom: 20px;">Items (@Model.CartItems.Count)</h3>
+        @foreach (var cartItem in Model.CartItems)
+        {
+            <div style="max-width: 400px;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="@cartItem.ImageUrl" alt="Product Image" style="max-width: 100px; max-height: 100px;">
+                    </div>
+
+                    <div class="col-md-6">
+                        <p>@cartItem.Season @cartItem.Player @cartItem.Title </p>
+                        <strong>$@cartItem.Price</strong>
+                        <div style="display: inline-block;">
+                            <strong style="display: inline-block; margin-right: 10px;">Size @cartItem.SelectedSize</strong>
+                            <strong style="display: inline-block;">Quantity @cartItem.Count</strong>
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+            </div>
+
+            itemTotal += cartItem.Count * cartItem.Price;
+        }
+    </div>
+
+
+
+
+
+
+    <br />
+    <br />
+
+</div>
+
+</div>
+

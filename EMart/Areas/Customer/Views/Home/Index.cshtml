@@ -1,6 +1,42 @@
 ﻿@model ParentViewModel
 
 
+
+<div style="display: flex; flex-direction: column;background-color: #EAEAEA; margin-bottom:10px; ">
+    <div style="width: 100%;"></div>
+    <div style="display: flex; flex-wrap: wrap; gap: 70px; width: 100%; padding:5px; margin-left:20px; text-transform:uppercase; font-weight:600">
+        @foreach (var league in Model.LeagueList)
+        {
+            <div style="text-align: center;">
+                <a asp-area="Customer" asp-controller="Filter" asp-action="Index" asp-route-leagueid="@league.Id" class="league-link" style="text-decoration: none; cursor: pointer; color:black;">
+                    <p style="margin-top: 5px;">@league.Name</p>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+
+<div class="modal fade" id="teamModal" tabindex="-1" aria-labelledby="teamModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 640px; min-width: 200px;">
+        <div class="modal-content" style="min-height: 300px; max-height: 800px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="teamModalLabel">Shop Your Team</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="teamModalBody">
+                <!-- Content goes here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
 <div style="display: flex; flex-direction: column; align-items: center; background-color: rgb(245, 246, 248);">
     <div style="width: 100%;">
         <h2 style="text-align: center;">Shop Your Favorite League</h2>
@@ -9,8 +45,10 @@
         @foreach (var league in Model.LeagueList)
         {
             <div style="text-align: center;">
-                <img src="@league.ImageUrl" alt="@league.Name" style="width: 100px; height: auto; margin-bottom: 10px;" />
-                <p style="margin-top: 5px; font-weight: bold;">@league.Name</p>
+                <a id="league-link" class="league-image" data-league-id="@league.Id" style="text-decoration: none; cursor: pointer; color:black;" onclick="filterByLeague('@league.Id')">
+                    <img src="@league.ImageUrl" alt="@league.Name" style="width: 100px; height: auto; margin-bottom: 10px;" />
+                    <p style="margin-top: 5px;">@league.Name</p>
+                </a>
             </div>
         }
     </div>
@@ -26,7 +64,7 @@
                         <img src="@product.ImageUrl" class="card-img-top rounded" />
                         <div class="card-body pb-0">
                             <div class="pl-1">
-                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@product.Season @product.PlayerName @product.Title @product.TeamName </p>
+                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@product.Season @product.PlayerName @product.Title </p>
                                 <p class="card-title text-warning text-center"><b>@product.ProductCode</b></p>
                             </div>
                             <div class="pl-1">
@@ -66,3 +104,48 @@
         localStorage.removeItem("customerId");
     </script>
 }
+
+
+
+<script>
+    function filterByLeague(leagueId) {
+        $.ajax({
+            url: '/Customer/Home/LeagueFilter',
+            type: 'GET',
+            data: { leagueId: leagueId },
+            success: function (result) {
+                $('#teamModalBody').empty();
+                for (var i = 0; i < result.data.length; i++) {
+                    var team = result.data[i];
+                    var teamHtml = `
+                                    <div style="display: inline-block; margin-right: 10px; margin-bottom:10px;">
+            <a href="/Customer/Filter/Team?teamId=${team.id}" class="team-link" style="text-decoration: none; color: black;">
+                <div class="team-popup" style="width: 100px; height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #ccc; background-color: #f0f0f0; padding: 15px; cursor: pointer;">
+                    <div style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <img src="${team.imageUrl}" alt="${team.name}" style="width: 100%; height: 100%; object-fit: cover;" />
+                        <p style="margin: 5px 0; text-align: center; font-size: 0.75rem; line-height: 0.75rem;">${team.name}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+                            `;
+                    $('#teamModalBody').append(teamHtml);
+                }
+                $('#teamModal').modal('show');
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+</script>
+
+
+
+
+
+
+
+
+
+

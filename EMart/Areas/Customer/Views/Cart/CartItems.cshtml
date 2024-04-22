@@ -120,7 +120,7 @@
                     <div>Total Items: <span id="total_items">@(Model.Sum(item => item.Count))</span> </div>
                     <div>Total Price: <span id="total_price">$@(Model.Sum(item => item.Price * item.Count))</span></div>
                 </div>
-                <a id="checkoutButton" asp-area="Customer" asp-controller="CheckOutController" asp-action="Index" class="btn btn-primary mt-3 w-100" style="background-color: #8A0707;">
+                <a id="checkoutButton" asp-area="Customer" asp-controller="CheckOut" asp-action="Shipping" class="btn btn-primary mt-3 w-100" style="background-color: #8A0707;">
                     <i class="fas fa-lock"></i> Checkout
                 </a>
 

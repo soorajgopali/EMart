@@ -23,37 +23,37 @@ namespace EMart.DA.Repository
         public List<ProductViewModel> GetList()
         {
             var query = (from p in _db.Products
-                        join cat in _db.Categories on p.CategoryId equals cat.Id
-                        join b in _db.Brands on p.BrandId equals b.Id
-                        join e in _db.Editions on p.EditionId equals e.Id
-                        join pl in _db.Players on p.PlayerId equals pl.Id
-                        join sp in _db.Specifics on p.SpecificId equals sp.Id
-                        join t in _db.Teams on p.TeamId equals t.Id
-                        select new ProductViewModel
-                        {
-                           Id= p.Id,
-                            Title= p.Title,
-                            ProductCode= p.ProductCode,
-                            Description= p.Description,
-                            Price= p.Price,
-                            ImageUrl=p.ImageUrl,
-                            Year=p.Year,
-                            Season=p.Season,
-                            CategoryName = cat.Name,
-                            BrandName = b.Name,
-                            EditionName = e.Name,
-                            PlayerName = pl.Name,
-                            SpecifiName = sp.Name,
-                            TeamName = t.Name,
-                            ProductSize = string.Join(",", _db.ProductSizes
-                                                              .Where(ps => ps.ProductId == p.Id)
-                                                              .Join(_db.Sizes, ps => ps.SizesId, s => s.Id, (ps, s) => s.Sizes)
-                                                              .DefaultIfEmpty())
-                        }).ToList();
-    
+                         join cat in _db.Categories on p.CategoryId equals cat.Id
+                         join b in _db.Brands on p.BrandId equals b.Id
+                         join e in _db.Editions on p.EditionId equals e.Id
+                         join pl in _db.Players on p.PlayerId equals pl.Id
+                         join sp in _db.Specifics on p.SpecificId equals sp.Id
+                         join t in _db.Teams on p.TeamId equals t.Id
+                         select new ProductViewModel
+                         {
+                             Id = p.Id,
+                             Title = p.Title,
+                             ProductCode = p.ProductCode,
+                             Description = p.Description,
+                             Price = p.Price,
+                             ImageUrl = p.ImageUrl,
+                             Year = p.Year,
+                             Season = p.Season,
+                             CategoryName = cat.Name,
+                             BrandName = b.Name,
+                             EditionName = e.Name,
+                             PlayerName = pl.Name,
+                             SpecifiName = sp.Name,
+                             TeamName = t.Name,
+                             ProductSize = string.Join(",", _db.ProductSizes
+                                                               .Where(ps => ps.ProductId == p.Id)
+                                                               .Join(_db.Sizes, ps => ps.SizesId, s => s.Id, (ps, s) => s.Sizes)
+                                                               .DefaultIfEmpty())
+                         }).ToList();
 
 
-            
+
+
 
             string sql = string.Format($@"
                 SELECT p.Id 
@@ -126,6 +126,78 @@ namespace EMart.DA.Repository
         }
 
 
+        public List<ProductViewModel> GetByLeagueId(int leagueId)
+        {
+            var query = (from p in _db.Products
+                         join cat in _db.Categories on p.CategoryId equals cat.Id
+                         join b in _db.Brands on p.BrandId equals b.Id
+                         join e in _db.Editions on p.EditionId equals e.Id
+                         join pl in _db.Players on p.PlayerId equals pl.Id
+                         join sp in _db.Specifics on p.SpecificId equals sp.Id
+                         join t in _db.Teams on p.TeamId equals t.Id
+                         where t.LeagueId == leagueId
+                         select new ProductViewModel
+                         {
+                             Id = p.Id,
+                             Title = p.Title,
+                             ProductCode = p.ProductCode,
+                             Description = p.Description,
+                             Price = p.Price,
+                             ImageUrl = p.ImageUrl,
+                             Year = p.Year,
+                             Season = p.Season,
+                             CategoryName = cat.Name,
+                             BrandName = b.Name,
+                             EditionName = e.Name,
+                             PlayerName = pl.Name,
+                             SpecifiName = sp.Name,
+                             TeamName = t.Name,
+                             TeamImageUrl = t.ImageUrl,
+                             ProductSize = string.Join(",", _db.ProductSizes
+                                                               .Where(ps => ps.ProductId == p.Id)
+                                                               .Join(_db.Sizes, ps => ps.SizesId, s => s.Id, (ps, s) => s.Sizes)
+                                                               .DefaultIfEmpty())
+                         }).ToList();
 
+
+            return query;
+        }
+
+        public List<ProductViewModel> GetByTeamId(int teamId)
+        {
+            var query = (from p in _db.Products
+                         join cat in _db.Categories on p.CategoryId equals cat.Id
+                         join b in _db.Brands on p.BrandId equals b.Id
+                         join e in _db.Editions on p.EditionId equals e.Id
+                         join pl in _db.Players on p.PlayerId equals pl.Id
+                         join sp in _db.Specifics on p.SpecificId equals sp.Id
+                         join t in _db.Teams on p.TeamId equals t.Id
+                         where p.TeamId == teamId
+                         select new ProductViewModel
+                         {
+                             Id = p.Id,
+                             Title = p.Title,
+                             ProductCode = p.ProductCode,
+                             Description = p.Description,
+                             Price = p.Price,
+                             ImageUrl = p.ImageUrl,
+                             Year = p.Year,
+                             Season = p.Season,
+                             CategoryName = cat.Name,
+                             BrandName = b.Name,
+                             EditionName = e.Name,
+                             PlayerName = pl.Name,
+                             SpecifiName = sp.Name,
+                             TeamName = t.Name,
+                             ProductSize = string.Join(",", _db.ProductSizes
+                                                             .Where(ps => ps.ProductId == p.Id)
+                                                             .Join(_db.Sizes, ps => ps.SizesId, s => s.Id, (ps, s) => s.Sizes)
+                                                             .DefaultIfEmpty())
+                         }).ToList();
+
+
+            return query;
+        }
     }
 }
+

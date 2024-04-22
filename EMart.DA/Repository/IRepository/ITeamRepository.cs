@@ -10,7 +10,10 @@ namespace EMart.DA.Repository.IRepository
 {
     public interface ITeamRepository : IRepository<Team>
     {
+        List<TeamViewModel> GetById(int teamId);
         List<TeamViewModel> GetList();
+        List<TeamViewModel> GetListByLeague(int leagueId);
+
         void Update (Team team);
     }
 }

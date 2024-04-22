@@ -106,6 +106,22 @@ namespace EMart.Areas.Customer.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult LeagueFilter(int leagueId)
+        {
+            try
+            {
+                List<Team> teams = _unit.Team.GetList(u => u.LeagueId == leagueId).ToList();
+
+                return Json(new { success = true, message = "", data = teams });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "An error occurred while fetching teams.", data = new List<Team>() });
+            }
+        }
+
+
     }
 }
 

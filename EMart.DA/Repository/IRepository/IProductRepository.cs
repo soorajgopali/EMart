@@ -13,5 +13,7 @@ namespace EMart.DA.Repository.IRepository
         List<ProductViewModel> GetList();
 
         ProductViewModel GetById(int id);
+        List<ProductViewModel> GetByLeagueId(int leagueId);
+        List<ProductViewModel> GetByTeamId(int teamId);
     }
 }

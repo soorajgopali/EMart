@@ -1,4 +1,4 @@
-﻿@model EMart.Models.Models.ApplicationUser
+﻿@model UserProfile
 
 <div class="container">
 
@@ -7,13 +7,13 @@
         <div class="container text-center mx-auto">
             <div class="bg-light p-3">
                 <p>Already have an account?</p>
-                <a href="/Identity/Account/Login" class="text-decoration-none">LOG IN</a> or <a href="/Identity/Account/Register" class="text-decoration-none">REGISTER</a>
+                <a href="/Identity/Account/Login?returnUrl=/Customer/CheckOut/Shipping" class="text-decoration-none">LOG IN</a> or <a href="/Identity/Account/Register" class="text-decoration-none">REGISTER</a>
             </div>
         </div>
     }
     <h1>Shipping Address</h1>
-    </div>
-    <form asp-action="Register" method="post">
+
+    <form asp-area="Customer" asp-controller="CheckOut" asp-action="Continue" method="post">
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
@@ -72,16 +72,37 @@
             </div>
         </div>
         <br />
-        <!-- Add other properties here -->
         <div class="row">
             <div class="col-md-6">
-                <button type="submit" class="btn btn-primary">Register</button>
+                <button id="continueCheckoutBtn" type="submit" onclick="return validate();" class="btn btn-primary" style="background-color: #8A0707;">
+                    <i class="fas fa-lock"></i> Continue Checkout
+                </button>
             </div>
         </div>
     </form>
 
 
+    <script>
+        function validate(){
+            if ('@User.Identity.IsAuthenticated' == 'False') {
+                alert("Please login first to continue.");
+                return false;
+            }
+        }
+    </script>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+    <script>
+        var isUserLogin = '@ViewBag.IsUserLogin';
+        var customerId = '@ViewBag.CustomerId';
+        if (customerId && isUserLogin === '1') {
+            localStorage.setItem("customerId", customerId);
+        }
+
+    </script>
+

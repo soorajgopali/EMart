@@ -21,6 +21,8 @@ namespace EMart.DA.Repository.IRepository
         IShoppingCartRepository ShoppingCart { get; }
         ISizeRepository Size { get; }
         IProductsizeRepository Productsize { get; }
+        IUserRepository User { get; }
+        IOrderRepository Order { get; }
         void Save();
     }
 }

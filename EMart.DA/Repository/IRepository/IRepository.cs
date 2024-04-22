@@ -14,6 +14,7 @@ namespace EMart.DA.Repository.IRepository
         IEnumerable<T> GetAll();
         T Get(Expression<Func<T, bool>> predicate);
         //void Add(T entity);
+        IEnumerable<T> GetList(Expression<Func<T, bool>> predicate);
 
         IEnumerable<T> Execute(string sql, params SqlParameter[] parameters);
         T Add(T entity);

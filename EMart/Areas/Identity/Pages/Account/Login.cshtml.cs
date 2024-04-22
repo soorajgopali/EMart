@@ -64,6 +64,7 @@ namespace EMart.Areas.Identity.Pages.Account
         /// </summary>
         [TempData]
         public string ErrorMessage { get; set; }
+        public string CalledBy { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -94,6 +95,7 @@ namespace EMart.Areas.Identity.Pages.Account
             [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }
             public string TempSessionId { get; set; }
+            public string CalledBy { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -105,17 +107,17 @@ namespace EMart.Areas.Identity.Pages.Account
 
             returnUrl ??= Url.Content("~/");
 
-            // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
             ReturnUrl = returnUrl;
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
+
+
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
@@ -132,10 +134,9 @@ namespace EMart.Areas.Identity.Pages.Account
                         UpdateSessionId(user.Id, Input.TempSessionId);
                         _httpContextAccessor.HttpContext.Session.SetString("customerId", user.Id);
                         netUser = "1";
-
                     }
-
-                    return LocalRedirect(returnUrl + "?netUser=" + netUser);
+                    var returnURL = returnUrl + "?netUser=" + netUser;
+                    return LocalRedirect(returnURL);
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -157,7 +158,8 @@ namespace EMart.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private void UpdateSessionId(string userId,string oldSessionId)
+
+        private void UpdateSessionId(string userId, string oldSessionId)
         {
             try
             {

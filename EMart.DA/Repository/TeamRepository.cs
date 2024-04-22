@@ -35,6 +35,39 @@ namespace EMart.DA.Repository
             return teamViewModels;
         }
 
+        public List<TeamViewModel> GetListByLeague(int leagueId)
+        {
+            var query = (from team in _db.Teams
+                         join league in _db.Leagues on team.LeagueId equals league.Id
+                         join teamType in _db.TeamTypes on league.TeamTypeId equals teamType.Id
+                         where team.LeagueId == leagueId
+                         select new TeamViewModel
+                         {
+                             Id = team.Id,
+                             Name = team.Name,
+                             ImageUrl = team.ImageUrl,
+                         }).ToList();
+
+            return query;
+        }
+
+
+        public List<TeamViewModel> GetById(int teamId)
+        {
+            var query = (from team in _db.Teams
+                         join league in _db.Leagues on team.LeagueId equals league.Id
+                         join teamType in _db.TeamTypes on league.TeamTypeId equals teamType.Id
+                         where team.Id == teamId
+                         select new TeamViewModel
+                         {
+                             Id = team.Id,
+                             Name = team.Name,
+                             ImageUrl = team.ImageUrl,
+                         }).ToList();
+
+            return query;
+        }
+
         public void Update(Team team)
         {
             _db.Teams.Update(team);

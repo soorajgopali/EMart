@@ -1,0 +1,102 @@
+﻿    @model ParentViewModel
+
+
+
+<div style="display: flex; flex-direction: column;background-color: #EAEAEA; margin-bottom:10px; ">
+    <div style="width: 100%;"></div>
+    <div style="display: flex; flex-wrap: wrap; gap: 70px; width: 100%; padding:5px; margin-left:20px; text-transform:uppercase; font-weight:600">
+        @foreach (var league in Model.LeagueList)
+        {
+            <div style="text-align: center;">
+                <a asp-area="Customer" asp-controller="Filter" asp-action="Index" asp-route-leagueid="@league.Id" class="league-link" style="text-decoration: none; cursor: pointer; color:black;">
+                    <p style="margin-top: 5px;">@league.Name</p>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+
+<div style="display: flex; flex-direction: column; align-items: center; background-color: rgb(245, 246, 248);">
+    <div style="width: 100%;">
+        <h2 style="text-align: center;">Shop Your Team</h2>
+        <br />
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; width: 100%;">
+        @foreach (var team in Model.TeamList)
+        {
+            <div style="text-align: center;">
+                <a id="league-link" asp-controller="Filter" asp-action="Team" asp-route-teamId="@team.Id" class="league-image" data-league-id="@team.Id" style="text-decoration: none; cursor: pointer; color:black;" onclick="filterByLeague('@team.Id')">
+                    <img src="@team.ImageUrl" alt="@team.Name" style="width: 100px; height: auto; margin-bottom: 10px;" />
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+<div class="row pb-3" style="margin-top:100px">
+    @foreach (var product in Model.productList)
+    {
+        <a asp-controller="Home" asp-action="Details" asp-route-productId="@product.Id" class="col-lg-3 col-sm-6 text-decoration-none">
+            <div class="row p-2">
+                <div class="col-12 p-1">
+                    <div class="card border-0 p-3 shadow border-top border-5 rounded">
+                        <img src="@product.ImageUrl" class="card-img-top rounded" />
+                        <div class="card-body pb-0">
+                            <div class="pl-1">
+                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@product.Season @product.PlayerName @product.Title </p>
+                                <p class="card-title text-warning text-center"><b>@product.ProductCode</b></p>
+                            </div>
+                            <div class="pl-1">
+                                <p class="text-dark text-opacity-75 text-center mb-0">
+                                    <span class="">
+                                        @product.Price.ToString("c")
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="pl-1">
+                                <p class="text-dark text-opacity-75 text-center">
+                                    <span>
+
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    }
+</div>
+
+<script>
+    var isUserLogin = '@ViewBag.IsUserLogin';
+    var customerId = '@ViewBag.CustomerId';
+    if (customerId && isUserLogin === '1') {
+        localStorage.setItem("customerId", customerId);
+    }
+
+</script>
+
+@if (TempData.ContainsKey("ClearCustomerId") && (bool)TempData["ClearCustomerId"])
+{
+    <script>
+        localStorage.removeItem("customerId");
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

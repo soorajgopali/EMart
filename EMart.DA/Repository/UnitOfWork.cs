@@ -25,6 +25,8 @@ namespace EMart.DA.Repository
         public IShoppingCartRepository ShoppingCart { get; private set; }
         public ISizeRepository Size { get; private set; }
         public IProductsizeRepository Productsize { get; private set; }
+        public IUserRepository User { get; private set; }
+        public IOrderRepository Order { get; private set; }
 
         public UnitOfWork (ApplicationDBContext db)
         {
@@ -41,6 +43,8 @@ namespace EMart.DA.Repository
             ShoppingCart = new ShoppingCartRepository(_db);
             Size = new SizeRepository(_db);
             Productsize = new ProductsizeRepository(_db);
+            User = new UserRepository(_db);
+            Order = new OrderRepository(_db);
         }
         public void Save()
         {

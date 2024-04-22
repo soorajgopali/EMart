@@ -10,5 +10,6 @@ namespace EMart.Models.Models.ViewModels
     {
         public List<ProductViewModel> productList { get; set; }
         public List<LeagueViewModel> LeagueList { get; set; }
+        public List<TeamViewModel> TeamList { get; set; }
     }
 }

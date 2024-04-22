@@ -9,6 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using static Dapper.SqlMapper;
 
 namespace EMart.DA.Repository
 {
@@ -66,6 +67,13 @@ namespace EMart.DA.Repository
         public IEnumerable<T> GetAll()
         {
             IQueryable<T> query = dbSet;
+            return query.ToList();
+        }
+
+        public IEnumerable<T> GetList(Expression<Func<T, bool>> predicate)
+        {
+            IQueryable<T> query = dbSet;
+            query = query.Where(predicate);
             return query.ToList();
         }
 

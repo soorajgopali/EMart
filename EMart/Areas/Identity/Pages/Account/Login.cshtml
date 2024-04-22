@@ -11,6 +11,7 @@
         <section>
             <form id="account" method="post">
                 <input asp-for="Input.TempSessionId" value="" hidden />
+                <input asp-for="Input.CalledBy" hidden />
                 <h2>Use a local account to log in.</h2>
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>

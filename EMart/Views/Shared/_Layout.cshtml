@@ -7,173 +7,97 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EMart.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        .search-input:focus {
-            border-color: black; /* This is the success color in Bootstrap 5. For Bootstrap 4 or custom themes, this value may need to be adjusted. */
-            box-shadow: 0 0 0 0.2rem rgba(255, 255, 254, 1); /* Optional: Adds a 'glow' effect with the success color. Adjust or remove as desired. */
-        }
-
-        .navbar-custom, .navbar-custom-secondary, .footer-custom {
-            padding: 0.5rem 1rem;
-            background-color: black;
-        }
-
-        .navbar-custom-secondary {
-            margin-top: -16px !important;
-            margin-bottom:0px !important;
-        }
-
-         #navbar1.navbar-nav {
-            
-                border: 1px solid green; /* Sets the border color to purple */
-                margin: 5px; /* Adds a little space between each <li> */
-          
-               
-            }
-
-        .navbar-nav {
-            display: flex; /* Enables flexbox */
-            justify-content: center; /* Centers the items horizontally */
-            width: 100%; /* Ensures the navbar takes full width */
-        }
-
-       
-
-        .navbar-nav .nav-link, .navbar-nav-secondary .nav-link {
-            color: #fff !important;
-            
-        }
-
-            .navbar-nav .nav-link:hover, .navbar-nav-secondary .nav-link:hover {
-                color: #87CEEB !important;
-            }
-
-        .form-inline .form-control {
-            width: 200px;
-        }
-
-        .footer-custom {
-            text-align: center;
-        }
-        /* Adjusted navbar styles */
-        .navbar-collapse ul {
-            padding-left: 0;
-            margin: 0;
-            list-style-type: none;
-        }
-
-            .navbar-collapse ul li {
-                padding: 8px;
-            }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-light border-bottom box-shadow mb-3 navbar-custom">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="~/Images/logo/logo3.JPG" alt="" width="80" height="80">
+    <header class="text-white">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #003C43; height:100px;">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="margin-left: 70px;">
+                    <img src="/Images/logo.png" alt="KitStore Logo" style="width: 150px; height: 50px;" />
                 </a>
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">KitStore</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-                    <form class="d-flex">
-                        <div class="input-group">
-                            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
-                            <button type="button" class="btn btn-outline-success">Search</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- Correctly positioned hamburger menu dropdown -->
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" asp-area="" asp-controller="League" asp-action="Index">League</a></li>
-                        <li><a class="dropdown-item" asp-area="" asp-controller="Team" asp-action="Index">Team</a></li>
-                        <li><a class="dropdown-item" asp-area="" asp-controller="Player" asp-action="Index">Players</a></li>
-                        <li><a class="dropdown-item" asp-area="" asp-controller="Brand" asp-action="Index">Brands</a></li>
-                        <li><a class="dropdown-item" asp-area="" asp-controller="Specific" asp-action="Index">Specifics</a></li>
-                        <li><a class="dropdown-item" asp-area="" asp-controller="International" asp-action="Index">International</a></li>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1 justify-content-end">
 
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark text-white" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark text-white" asp-area="Admin" asp-controller="Team" asp-action="Index">Teams</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark text-white" asp-area="Admin" asp-controller="Player" asp-action="Index">Players</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark text-white" asp-area="Admin" asp-controller="Specific" asp-action="Index">Specifics</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark text-white" asp-area="Admin" asp-controller="Brand" asp-action="Index">Brands</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark text-white" asp-area="Admin" asp-controller="Edition" asp-action="Index">Editions</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark text-white" asp-area="Admin" asp-controller="League" asp-action="Index">Leagues</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark text-white" asp-area="Admin" asp-controller="Product" asp-action="Index">Products</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark text-white" asp-area="Admin" asp-controller="Size" asp-action="Index">Sizes</a>
+                            </li>
+                        }
+
+                        else
+                        {
+                            <li class="nav-item">
+                                <form class="form-inline" asp-area="Customer" asp-controller="Search" asp-action="Index" method="get">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="searchQuery" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" style="width: 500px;">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-light" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+
+                        }
 
                     </ul>
-                </div>
-            </div>
-        </nav>
 
-
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3 navbar-custom-secondary">
-            <div class="container-fluid">
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul id="navbar1" class="navbar-nav justify-content-center">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                Premier League
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="" asp-route-teamName="">Arsenal</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="" asp-route-teamName=" ">Liverpool</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="" asp-route-teamName="">Manchester City</a></li>
-                                <!-- Add more teams as needed -->
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                 laliga
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="" asp-route-teamName="">Barcelona</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="" asp-route-teamName=" ">Real Madrid</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="" asp-route-teamName="">Cadic</a></li>
-                                <!-- Add more teams as needed -->
-                            </ul>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                Serie A
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="" asp-route-teamName="">Juventus</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="" asp-route-teamName=" ">AC Milan</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="" asp-route-teamName="">Inter Milan</a></li>
-                                <!-- Add more teams as needed -->
-                            </ul>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                Ligue1
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="" asp-route-teamName="">PSG</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="" asp-route-teamName=" ">Monaco</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="" asp-route-teamName="">Nantes</a></li>
-                                <!-- Add more teams as needed -->
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                Bundesliga
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="" asp-route-teamName="">Bayern Munich</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="" asp-route-teamName=" ">Dortmund</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="" asp-route-teamName="">RB leipzig</a></li>
-                                <!-- Add more teams as needed -->
-                            </ul>
-                        </li>
+                    <ul class="navbar-nav flex-grow-1 justify-content-end">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Brand" asp-action="Index">UEFA Champions League</a>
+                            <a id="cart-link" asp-area="Customer" asp-controller="Cart" asp-action="CartItems" class="nav-link text-dark text-white" style="position: relative;">
+                                <div style="position: relative; display: inline-block; padding: 10px; width: 55px; height: 40px;">
+                                    <span id="cart-count" class="badge badge-pill badge-danger" style="position: absolute; top: 5px; right: 5px; z-index: 1; color: black; background-color: #FFFFFF; width: 20px; height: 20px; border-radius: 50%; text-align: center; line-height: 20px; display: flex; justify-content: center; align-items: center;">0</span>
+                                    <i class="fas fa-shopping-cart" style="color: white; font-size: 30px;"></i>
+                                </div>
+                            </a>
                         </li>
-                   
 
+                        <li style="display: flex; justify-content: center;">
+                            <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#sidebarModal">
+                                <div style="width: 55px; height: 40px; display: flex; justify-content: center; align-items: center; margin-top:5px;">
+                                    <i class="fas fa-bars" style="font-size: 30px;"></i>
+                                </div>
+                            </a>
+                        </li>
                     </ul>
 
                     <div class="modal right fade" id="sidebarModal" tabindex="-1" role="dialog" aria-labelledby="sidebarModalLabel" aria-hidden="true" style="overflow-y: auto; right: 0; margin-right: 0; color:black;">
@@ -245,23 +169,38 @@
             </div>
         </nav>
     </header>
-   
 
-    <div class="container-fluid" style="  
-
-padding-left: 0;
-margin-left: 0;">
+    <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-   
-
     </div>
-    
 
-    <footer class="border-top footer text-muted footer-custom">
-        <div class="container">
-            &copy; 2024 - KitStore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+    <footer class="absolute-bottom" style="background-color: #003C43; color: #fff; padding: 20px 0;">
+        <div class="containers">
+            <div class="row">
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6">
+                    <h5>Follow Us</h5>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr style="border-color: #fff;">
+            <div class="row">
+                <div class="col-md-6">
+                    &copy; 2024 - KitStore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+                <div class="col-md-6">
+                    <p class="float-md-right">By Sooraj Gopali</p>
+                </div>
+            </div>
         </div>
     </footer>
 

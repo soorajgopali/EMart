@@ -30,7 +30,7 @@ namespace EMart.Areas.Customer.Controllers
 
                 if (cartItems == null || !cartItems.Any())
                 {
-                    return View(new List<CartViewModel>());
+                    return View(new List<CartViewModel> ());
                 }
 
                 return View(cartItems);

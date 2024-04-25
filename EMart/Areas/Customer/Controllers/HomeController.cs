@@ -28,9 +28,12 @@ namespace EMart.Areas.Customer.Controllers
 
         public IActionResult Index(string netUser = "")
         {
+            var productList = _unit.Product.GetList();
             var parentModel = new ParentViewModel
             {
-                productList = _unit.Product.GetList(),
+                productList2 = productList.Where(x => x.SpecificId == 1).ToList(),
+                productList3 = productList.Where(x => x.EditionId == 3).ToList(),
+                BrandList = _unit.Brand.GetList(),
                 LeagueList = _unit.League.GetList()
             };
             ViewBag.IsUserLogin = netUser;

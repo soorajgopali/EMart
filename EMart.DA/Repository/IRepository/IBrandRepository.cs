@@ -1,4 +1,5 @@
 ﻿using EMart.Models.Models;
+using EMart.Models.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace EMart.DA.Repository.IRepository
 {
     public interface IBrandRepository : IRepository<Brand>
     {
-
+        List<BrandViewModel> GetList();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using EMart.DA.Data;
 using EMart.DA.Repository.IRepository;
 using EMart.Models.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,7 @@ namespace EMart.DA.Repository
         {
             _db = db;
         }
+
+       
     }
 }

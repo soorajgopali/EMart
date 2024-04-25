@@ -40,9 +40,12 @@ namespace EMart.DA.Repository
                              Year = p.Year,
                              Season = p.Season,
                              CategoryName = cat.Name,
+                             BrandId = b.Id,
                              BrandName = b.Name,
+                             EditionId = e.Id,
                              EditionName = e.Name,
                              PlayerName = pl.Name,
+                             SpecificId = sp.Id,
                              SpecifiName = sp.Name,
                              TeamName = t.Name,
                              ProductSize = string.Join(",", _db.ProductSizes
@@ -198,6 +201,60 @@ namespace EMart.DA.Repository
 
             return query;
         }
+
+
+        public List<ProductViewModel> GetByType(int editionId, int specificId, int brandId)
+        {
+            var query = (from p in _db.Products
+                         join cat in _db.Categories on p.CategoryId equals cat.Id
+                         join b in _db.Brands on p.BrandId equals b.Id
+                         join e in _db.Editions on p.EditionId equals e.Id
+                         join pl in _db.Players on p.PlayerId equals pl.Id
+                         join sp in _db.Specifics on p.SpecificId equals sp.Id
+                         join t in _db.Teams on p.TeamId equals t.Id
+                         select new ProductViewModel
+                         {
+                             Id = p.Id,
+                             Title = p.Title,
+                             ProductCode = p.ProductCode,
+                             Description = p.Description,
+                             Price = p.Price,
+                             ImageUrl = p.ImageUrl,
+                             Year = p.Year,
+                             Season = p.Season,
+                             CategoryName = cat.Name,
+                             BrandName = b.Name,
+                             EditionName = e.Name,
+                             PlayerName = pl.Name,
+                             SpecifiName = sp.Name,
+                             TeamName = t.Name,
+                             TeamImageUrl = t.ImageUrl,
+                             ProductSize = string.Join(",", _db.ProductSizes
+                                                               .Where(ps => ps.ProductId == p.Id)
+                                                               .Join(_db.Sizes, ps => ps.SizesId, s => s.Id, (ps, s) => s.Sizes)
+                                                               .DefaultIfEmpty()),
+                             EditionId = p.EditionId, 
+                             SpecificId = p.SpecificId,
+                             BrandId = p.BrandId 
+                         });
+
+            if (editionId != 0)
+            {
+                query = query.Where(p => p.EditionId == editionId);
+            }
+            if (specificId != 0)
+            {
+                query = query.Where(p => p.SpecificId == specificId);
+            }
+            if (brandId != 0)
+            {
+                query = query.Where(p => p.BrandId == brandId);
+            }
+
+                return query.ToList();
+        }
+
+
     }
 }
 

@@ -7,7 +7,7 @@ namespace EMart.Models.Models
 {
     public class Product
     {
-        //test
+        //test2
         [Key]
         [Required]
         public int Id { get; set; }
